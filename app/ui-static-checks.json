@@ -1,0 +1,9 @@
+{
+  "localized_string_count": 108,
+  "all_three_locale_keys_equal": true,
+  "format_placeholders_equal": true,
+  "all_R_string_references_defined": true,
+  "direct_hardcoded_UI_Text_literals": [],
+  "Android_compilation": "Not run; requires configured SDK/JDK/Gradle and network dependencies.",
+  "instrumentation_test": "StudioExporterTest.kt authored, not run; verifies actual Android pixel recenter + metadata + exported pack validity without SU."
+}

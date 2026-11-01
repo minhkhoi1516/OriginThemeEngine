@@ -1,0 +1,16 @@
+{
+  "passed": 8,
+  "cases": [
+    "no lock: recovery leaves target unchanged",
+    "same-token stale lock: cleans verified leaves without writing target",
+    "already-published target: recovery preserves committed bytes",
+    "foreign lock preserved",
+    "live process lock preserved",
+    "unknown staging bytes preserved",
+    "unknown active resource refuses cleanup",
+    "symlink staging target is not followed for deletion"
+  ],
+  "device_engine_sha256": "7e40cafe42d4607cef34b4316ba2d16dfda2cb3e6dddd337a74da3108d2d0f95",
+  "transaction_source_sha256": "56b3fd4033c3d032d74007b46ec0896eb3448d15d8947eae85ceb0a09fdaf6db",
+  "scope": "Actual extracted recovery shell, real POSIX process/FD/filesystem operations; Android root/metadata/profile identity mocked. No Android or production paths modified."
+}

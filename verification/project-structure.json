@@ -1,0 +1,16 @@
+{
+  "passed": 8,
+  "checks": [
+    "modular Kotlin source tree exists",
+    "EN/VI/JA string key and placeholder parity: 109",
+    "UI string references exist; no direct Text literal labels",
+    "all project XML parses",
+    "local-only manifest without network/broad-storage permissions",
+    "fixed transaction excludes destructive/system/biometric commands",
+    "Compose entrypoint and Hilt application wired",
+    "versioned pack JSON schema parses"
+  ],
+  "kotlin_files": 30,
+  "kotlin_test_methods_written": 47,
+  "scope": "Offline structure/resource/policy checks ONLY. Kotlin compilation, Gradle dependencies, APK and Android runtime not verified by this script."
+}

@@ -1,0 +1,29 @@
+{
+  "passed": 21,
+  "cases": [
+    "atomic apply: old ZIP reader remains valid, new reader sees replacement",
+    "restore may return verified original while effect remains selected",
+    "unknown source hash is refused without replacing it",
+    "apply refuses active effect before creating staging",
+    "corrupted payload is refused before creating staging",
+    "corrupted undo snapshot is refused before writes",
+    "injected chcon failure leaves source unchanged and removes owned staging/lock",
+    "injected rename failure preserves source and cleans staging/lock",
+    "injected post-rename context failure atomically rolls back then cleans",
+    "busy lock is preserved and not removed by unsuccessful acquisition",
+    "preexisting staging directory is preserved; only newly acquired lock is cleaned",
+    "source changed during staging is preserved, not overwritten by rollback",
+    "insufficient free space refuses transaction before staging",
+    "mismatched Android SDK fails the actual profile guard",
+    "runtime without verified mv -T fails before lock/stage creation",
+    "runtime without inherited FD/stat-L support fails before lock/stage creation",
+    "hostile target symlink is replaced as a leaf by mv -T; unrelated directory remains untouched",
+    "hostile actual directory at destination refuses file rename and retains pending undo",
+    "stage-entry rename/symlink cannot redirect FD9 writes; changed entry refuses publish and cleanup",
+    "resource ancestor rename cannot redirect FD8 publish/rollback; original inode restored and pending retained",
+    "symlink target is rejected without replacing or following it for writes"
+  ],
+  "source_sha256": "56b3fd4033c3d032d74007b46ec0896eb3448d15d8947eae85ceb0a09fdaf6db",
+  "profile_sha256": "c161e4aff053cb54866039fa10c4b4637c9edff5f6de2da76f2b5ab4c46a070f",
+  "scope": "Actual extracted Kotlin GUARD/TRANSACTION shell, real POSIX hashing/rename/ZIP/snapshots. Android UID/SELinux/settings/model/APK/library identity are host fixtures. No Android device or real system writes."
+}

@@ -1,0 +1,6 @@
+{
+  "passed": 6,
+  "scope": "Offline Python bootstrap safety unit tests; no download or Gradle/Android compilation.",
+  "script_sha256": "4b0b64f65f52eb3152c8827428c69aaf0420936e1e072c58f5d09da0e9060fb6",
+  "tests_sha256": "f5936abc3272e9f5e8e1398cf847618d01a9aff147c9d6b34b21dcf29fdba5d9"
+}
