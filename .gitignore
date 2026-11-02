@@ -4,6 +4,8 @@ local.properties
 **/build/
 **/*.jks
 **/*.keystore
+**/*.p12
+**/*.pfx
 .idea/
 .tooling/
 __pycache__/

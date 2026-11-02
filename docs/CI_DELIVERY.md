@@ -6,4 +6,13 @@ The workflow keeps build logs, host checks, Kotlin unit results and Android lint
 
 Public-repository CI debug signing keys are temporary. Final owner-delivered test APKs should be signed with an owner-private key kept outside Git and public CI caches. Export OTE restore points through SAF before any uninstall or data clear.
 
-The workflow can also be started from Actions > OTE Android build > Run workflow. If Actions is disabled by account or repository policy, the repository owner must enable it; this source commit does not bypass that policy.
+The workflow can also be started from Actions > OTE Android build > Run workflow.
+The owner has confirmed the account-level message “GitHub Actions is currently
+disabled for your account. Please reach out to GitHub Support for assistance.”
+This restriction requires GitHub Support; changing repository workflow settings
+does not resolve it. No GitHub Actions run has built an APK for this project.
+
+`codemagic.yaml` now provides an independent, manual Android build using the same
+repository. See [phone setup instructions](CODEMAGIC.md). It is configured for
+Personal-plan M2 machines and does not enable paid billing or automatic builds.
+No Codemagic account connection or completed build is claimed by adding this file.

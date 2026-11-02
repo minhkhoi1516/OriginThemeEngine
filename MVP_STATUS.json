@@ -38,9 +38,11 @@
     "community repository",
     "multi-layer and particle editor"
   ],
-  "build_blocker": "Local SDK unavailable; GitHubApp installation177521905 now visible, attempting firstCIbuild.",
+  "build_blocker": "GitHub Actions disabled at account level (owner-confirmed message). Local shell cannot fetch missing JDK17/Android SDK. Independent Codemagic M2 workflow configured; owner must add the public repo and start its first build.",
   "important": "Earlier user shell research successes do not validate this newly written Android app. All Android capabilities require build/device QA.",
-  "build_attempt": "bootstrap stopped with exit1: fullJDK17 required; Gradle/Kotlin compilation not started",
+  "build_attempt": "ci_build.py: 8 structure checks, 6 bootstrap tests, 21 transaction and 8 recovery fixtures passed; stopped before SDK/Gradle compilation because a complete JDK17 is unavailable locally.",
   "repository": "https://github.com/minhkhoi1516/OriginThemeEngine",
-  "ci_state": "ready_to_push_first_github_build"
+  "ci_state": "codemagic_configured_not_run",
+  "codemagic_workflow": "ote-android-debug",
+  "status_updated_utc": "2026-11-02"
 }

@@ -1,10 +1,12 @@
 # Build OTE
 
 This source distribution targets Android SDK 36 and Java 17. It needs a **full
-JDK 17**, not a JRE. The cloud executor used to author the project currently has
-only a Java 21 runtime, no Android SDK, and no installed Gradle. Its network
-permission request did not complete, so no APK compilation has been verified in
-that executor. Do not treat source checks or JVM fixture tests as an APK build.
+JDK 17**, not a JRE. The cloud executor used to author the project does not have
+the required JDK 17, Android SDK or installed Gradle. Toolchain downloads are
+unavailable in its current shell environment, so no APK compilation has been
+verified there. Do not treat source checks or shell fixture tests as an APK build.
+The owner's GitHub Actions account is disabled. An independent Codemagic build
+is configured; see [mobile setup instructions](CODEMAGIC.md).
 
 ## Prepare a build machine
 
@@ -31,7 +33,7 @@ chmod +x gradlew
 ./gradlew :core:root:test :engine:pack:test :engine:device:testDebugUnitTest :app:assembleDebug :app:lintDebug --stacktrace
 ```
 
-Windows PowerShell (APK build/lint only; the POSIX host test suite needs WSL/Linux/macOS or CI):
+Windows PowerShell (APK build/lint only; transaction/recovery shell fixtures need Linux or WSL with `/proc/self/fd` and GNU tools):
 
 ```powershell
 .\gradlew.bat :app:assembleDebug :app:lintDebug --stacktrace
@@ -83,7 +85,10 @@ Validate release R8 output and run the device checklist before distribution.
 `.github/workflows/android.yml` builds the debug APK and runs unit/lint checks
 on a prepared hosted runner. Uploading that workflow to a repository and running
 it requires the repository owner's normal authorization. No CI run or uploaded
-APK is claimed merely because the workflow file exists.
+APK is claimed merely because the workflow file exists. `codemagic.yaml` uses
+the provider's M2 machine with Java 17 and runs `scripts/ci_build.py`. Its reports
+explicitly distinguish passed, failed and platform-skipped steps. Android root
+or instrumentation tests are not run by this hosted workflow.
 
 ## Development APK update identity
 
