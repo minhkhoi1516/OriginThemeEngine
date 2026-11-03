@@ -3,13 +3,13 @@
 ## Evidence labels
 
 - Source implementation is not compilation proof.
-- Kotlin JUnit tests are written; record actual Gradle test results after toolchain/dependencies are available.
+- The second owner-supplied Codemagic log completed root/pack/data/Studio unit-test tasks and lint. PNG tests failed to compile in the Android module; their move to `engine:png` is pending a new run. See `verification/codemagic-second-build.json`.
 - Host shell fixtures use real filesystem/rename/ZIP with Android identity and SELinux mocked, not real device QA.
 - OriginOS runtime/UI, GIF conversion performance, permission dialogs, Room migrations and native pack rendering require actual build/device testing.
 
 ## Commands
 
-`./gradlew :core:root:test :engine:pack:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:assembleDebug`
+`./gradlew :core:root:test :engine:pack:test :engine:png:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:assembleDebug`
 
 `./gradlew :app:lintDebug`
 

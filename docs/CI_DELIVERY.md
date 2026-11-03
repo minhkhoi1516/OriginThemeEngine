@@ -15,8 +15,9 @@ does not resolve it. No GitHub Actions run has built an APK for this project.
 `codemagic.yaml` now provides an independent, manual Android build using the same
 repository. See [phone setup instructions](CODEMAGIC.md). It is configured for
 Personal-plan M2 machines and does not enable paid billing or automatic builds.
-The owner subsequently supplied a Codemagic log showing a successful debug APK
-build and APK Signature Scheme v2 verification. The verification phase failed
-during JUnit initialization of RootManagerTest. The test-signature correction
-is awaiting a fresh build; this does not establish a fully passing pipeline or
-Android device validation. See `verification/codemagic-first-build.json`.
+The owner's second Codemagic log confirms a successful debug APK build, APK v2
+signature verification, root/pack/data/Studio unit-test tasks and lint. The earlier
+JUnit initialization failure is resolved. The remaining PNG test compilation
+failure is addressed by moving the encoder and tests to the JVM `engine:png`
+module; a fresh build must verify that change. Neither a fully passing pipeline
+nor Android device validation is claimed. See `verification/codemagic-second-build.json`.

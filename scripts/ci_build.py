@@ -108,7 +108,7 @@ class Build:
             # Public tool only, for later owner-private signing. Never retain any keystore.
             shutil.copyfile(signing / "lib/apksigner.jar", REPORTS / "apksigner.jar")
             self.run("unit-tests-and-lint", gradle + [
-                ":core:root:test", ":engine:pack:test", ":data:testDebugUnitTest",
+                ":core:root:test", ":engine:pack:test", ":engine:png:test", ":data:testDebugUnitTest",
                 ":engine:device:testDebugUnitTest", ":app:testDebugUnitTest", ":app:lintDebug",
             ] + options + ["--continue"])
             self.finished = True

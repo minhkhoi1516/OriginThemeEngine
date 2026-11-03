@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import dev.origin.ote.model.ThemeKind
 import dev.origin.ote.model.ThemeManifest
+import dev.origin.ote.png.IndexedPngEncoder
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Files

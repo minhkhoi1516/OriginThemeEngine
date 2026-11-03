@@ -53,7 +53,7 @@ jobs:
           ./gradlew :app:assembleDebug --stacktrace --console=plain 2>&1 | tee build-debug.log
       - name: Kotlin unit tests and Android lint
         run: |
-          ./gradlew :core:root:test :engine:pack:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:testDebugUnitTest :app:lintDebug --stacktrace --console=plain 2>&1 | tee verification-gradle.log
+          ./gradlew :core:root:test :engine:pack:test :engine:png:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:testDebugUnitTest :app:lintDebug --continue --stacktrace --console=plain 2>&1 | tee verification-gradle.log
       - name: APK checksum
         if: always()
         run: |

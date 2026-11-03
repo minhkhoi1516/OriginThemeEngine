@@ -38,14 +38,15 @@
     "community repository",
     "multi-layer and particle editor"
   ],
-  "build_blocker": "Debug APK built on Codemagic; verification failed with RootManagerTest.initializationError. Corrected runBlocking return type awaits a fresh Codemagic main build. Local environment still lacks JDK17/Android SDK.",
+  "build_blocker": "Codemagic PNG test compilation cannot resolve javax.imageio in Android module. Encoder and tests moved to engine:png JVM module; awaiting rerun.",
   "important": "Earlier user shell research successes do not validate this newly written Android app. All Android capabilities require build/device QA.",
-  "build_attempt": "Owner-provided Codemagic log: assembleDebug BUILD SUCCESSFUL in 2m20s, APK v2 signature verifies; core:root:test fails during JUnit class initialization. Full unit suite/lint not confirmed.",
+  "build_attempt": "Owner-uploaded second Codemagic log: debug APK builds in 2m41s, APK v2 signature verifies, root/pack/data/Studio unit tasks and lint pass; engine:device:compileDebugUnitTestKotlin fails on ImageIO.",
   "repository": "https://github.com/minhkhoi1516/OriginThemeEngine",
-  "ci_state": "debug_apk_built_test_fix_awaiting_rerun",
+  "ci_state": "debug_apk_built_png_jvm_module_fix_awaiting_rerun",
   "codemagic_workflow": "ote-android-debug",
   "status_updated_utc": "2026-11-03",
   "kotlin_test_suite_passed": false,
   "latest_source_verification_pending": true,
-  "build_evidence": "verification/codemagic-first-build.json"
+  "build_evidence": "verification/codemagic-second-build.json",
+  "lint_debug_passed": true
 }

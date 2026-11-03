@@ -6,12 +6,19 @@ This is a source implementation of the MVP, not a statement that the complete ma
 
 - `core:model`: platform-neutral domain models and versioned pack contract.
 - `engine:pack`: pure JVM parser/validator/exporter, no Android or root.
+- `engine:png`: pure JVM indexed PNG encoder; desktop ImageIO is confined to its tests.
 - `core:root`: pure JVM demand-only SU process boundary, no UI or pack dependency.
 - `data`: Android SAF, GIF/image conversion, Room and DataStore repositories. App-private UUID storage.
 - `engine:device`: verified device profile, native PNG8 builder, private snapshot/journal and fixed resource transaction.
 - `app`: Hilt composition root, Compose design system, navigation, feature screens and MVVM.
 
 The requested module tree is consolidated into seven Gradle modules to keep the MVP build manageable. Feature screens and localization are packages/resources within app; splitting those into separate Gradle libraries is an organizational change rather than extra functionality. Dependencies flow toward model/pack/root. DeviceEngine is an Android integration facade over repository and root; it does not claim a perfectly platform-free domain use-case layer.
+
+`engine:device` consumes the production JAR from `engine:png`. Keeping the PNG
+interoperability tests in that JVM module gives them the JDK's `java.desktop`
+API; the Android module's Kotlin test compilation did not resolve ImageIO.
+The encoder algorithm and its five existing tests are retained. Android APKs
+do not include the desktop test classes or ImageIO dependency.
 
 ## Real user flow
 

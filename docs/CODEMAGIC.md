@@ -3,9 +3,10 @@
 GitHub Actions của chủ tài khoản đang bị disabled ở cấp tài khoản. Repo vẫn giữ
 nguyên; Codemagic tải source bằng Git và chạy trên máy build riêng.
 File `codemagic.yaml` đã định nghĩa workflow `ote-android-debug` / **OTE Android APK**.
-Log lượt chạy đầu do chủ dự án cung cấp xác nhận tạo debug APK và kiểm chữ ký v2
-thành công. Unit verification dừng ở `RootManagerTest.initializationError`;
-bản sửa kiểu trả về của hàm test đang chờ chạy lại. Chưa kiểm thử app trên điện thoại.
+Log mới do chủ dự án cung cấp xác nhận debug APK, chữ ký v2, test root/pack/data/Studio
+và lint đã qua. Test PNG còn lỗi compile `javax.imageio` ở module Android; đã chuyển
+encoder cùng năm test sang module JVM `engine:png`, đang chờ lượt chạy tiếp theo.
+Chưa kiểm thử app trên điện thoại.
 
 ## Thao tác một lần
 

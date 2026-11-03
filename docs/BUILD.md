@@ -30,7 +30,7 @@ Linux/macOS:
 
 ```sh
 chmod +x gradlew
-./gradlew :core:root:test :engine:pack:test :engine:device:testDebugUnitTest :app:assembleDebug :app:lintDebug --stacktrace
+./gradlew :core:root:test :engine:pack:test :engine:png:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:assembleDebug :app:lintDebug --stacktrace
 ```
 
 Windows PowerShell (APK build/lint only; transaction/recovery shell fixtures need Linux or WSL with `/proc/self/fd` and GNU tools):

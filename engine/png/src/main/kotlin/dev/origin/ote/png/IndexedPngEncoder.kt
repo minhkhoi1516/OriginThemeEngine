@@ -1,4 +1,4 @@
-package dev.origin.ote.device
+package dev.origin.ote.png
 
 import java.io.DataOutputStream
 import java.io.OutputStream
