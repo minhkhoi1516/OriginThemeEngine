@@ -159,7 +159,8 @@ class RootManagerTest {
         assertFalse(manager.state.value.available)
     }
 
-    @Test fun quoteTreatsMetacharactersAsOneLiteralArgument() = runBlocking {
+    // assertFailsWith returns the exception; force Unit so JUnit 4 sees JVM void.
+    @Test fun quoteTreatsMetacharactersAsOneLiteralArgument() = runBlocking<Unit> {
         Fixture().use { fixture ->
             val marker = fixture.directory.resolve("injected")
             val value = "text' \$(touch $marker) `printf ignored`\nnext line"

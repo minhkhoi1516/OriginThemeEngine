@@ -25,10 +25,10 @@
     "structure": 8
   },
   "kotlin_test_methods_written": 57,
-  "kotlin_tests_run": false,
-  "kotlin_compilation_verified": false,
-  "android_dependency_resolution_verified": false,
-  "debug_apk_built": false,
+  "kotlin_tests_run": true,
+  "kotlin_compilation_verified": true,
+  "android_dependency_resolution_verified": true,
+  "debug_apk_built": true,
   "release_apk_built": false,
   "android_device_tested": false,
   "not_implemented": [
@@ -38,11 +38,14 @@
     "community repository",
     "multi-layer and particle editor"
   ],
-  "build_blocker": "GitHub Actions disabled at account level (owner-confirmed message). Local shell cannot fetch missing JDK17/Android SDK. Independent Codemagic M2 workflow configured; owner must add the public repo and start its first build.",
+  "build_blocker": "Debug APK built on Codemagic; verification failed with RootManagerTest.initializationError. Corrected runBlocking return type awaits a fresh Codemagic main build. Local environment still lacks JDK17/Android SDK.",
   "important": "Earlier user shell research successes do not validate this newly written Android app. All Android capabilities require build/device QA.",
-  "build_attempt": "ci_build.py: 8 structure checks, 6 bootstrap tests, 21 transaction and 8 recovery fixtures passed; stopped before SDK/Gradle compilation because a complete JDK17 is unavailable locally.",
+  "build_attempt": "Owner-provided Codemagic log: assembleDebug BUILD SUCCESSFUL in 2m20s, APK v2 signature verifies; core:root:test fails during JUnit class initialization. Full unit suite/lint not confirmed.",
   "repository": "https://github.com/minhkhoi1516/OriginThemeEngine",
-  "ci_state": "codemagic_configured_not_run",
+  "ci_state": "debug_apk_built_test_fix_awaiting_rerun",
   "codemagic_workflow": "ote-android-debug",
-  "status_updated_utc": "2026-11-02"
+  "status_updated_utc": "2026-11-03",
+  "kotlin_test_suite_passed": false,
+  "latest_source_verification_pending": true,
+  "build_evidence": "verification/codemagic-first-build.json"
 }

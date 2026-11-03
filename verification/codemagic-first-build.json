@@ -1,0 +1,40 @@
+{
+  "source": "Codemagic console log pasted by the project owner into this conversation",
+  "expected_source_commit": "fc145e2336dc5d77e01b725b46db756a4c997980",
+  "source_commit_confirmed_in_log": false,
+  "host": "macOS (log paths under /Users/builder/clone)",
+  "gradle": "8.11.1",
+  "source_checks_passed": 8,
+  "bootstrap_tests_passed": 6,
+  "assemble_debug": {
+    "result": "BUILD SUCCESSFUL",
+    "duration": "2m 20s",
+    "actionable_tasks": 91
+  },
+  "apk_signature": {
+    "verified": true,
+    "scheme_v2": true,
+    "signer": "Android Debug",
+    "certificate_sha256": "69f4c1c13bbddac53d5389ef1c62dad39b59c35ecc300512d05cea833fdb1b11"
+  },
+  "apk_file_sha256": null,
+  "artifact_downloaded_by_agent": false,
+  "verification": {
+    "result": "failed",
+    "task": ":core:root:test",
+    "test": "RootManagerTest.initializationError",
+    "exception": "org.junit.runners.model.InvalidTestClassError",
+    "root_test_report": "1 test completed, 1 failed",
+    "complete_unit_suite_passed": false,
+    "lint_pass_confirmed": false
+  },
+  "source_diagnosis": {
+    "method": "quoteTreatsMetacharactersAsOneLiteralArgument",
+    "issue": "The expression-bodied runBlocking test ends in assertFailsWith, whose result is an exception. JUnit4 requires a public void zero-argument test method.",
+    "fix": "Use runBlocking<Unit> so the test has JVM void return type.",
+    "supporting_junit_source": "https://github.com/junit-team/junit4/blob/r4.13.2/src/main/java/org/junit/runners/model/FrameworkMethod.java",
+    "fix_rerun_verified": false
+  },
+  "android_device_tested": false,
+  "limitations": "User log proves the first APK build/signature step, not successful full QA, artifact identity or successful installation on the phone. The exception detail naming the bad method was not included in the pasted log; the return-type defect was identified directly in source."
+}

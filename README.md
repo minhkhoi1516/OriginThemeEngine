@@ -1,7 +1,7 @@
 # Origin Theme Engine — OTE 0.1 MVP
 
 Mã nguồn Android Kotlin/Compose cho quản lý animation AOD và hiệu ứng vân tay OriginOS.
-Đây là **bản triển khai MVP ở mức source**, không phải tuyên bố đã hoàn thành toàn bộ master prompt.
+Đây là **bản đang phát triển**, chưa hoàn thành toàn bộ master prompt.
 
 ## Trạng thái bàn giao
 
@@ -16,7 +16,7 @@ Mã nguồn Android Kotlin/Compose cho quản lý animation AOD và hiệu ứng
 - Adapter FP có profile chính xác, PNG8 encoder thật, snapshot/journal, staging/rename/postcheck/rollback.
 - AOD apply/restore, layer/particle editor, factory restore khi không có snapshot gốc và community repository **chưa triển khai**. UI không báo giả thành công.
 
-**Chưa có APK và chưa biên dịch Kotlin/Android trong môi trường bàn giao.** Cloud hiện chưa có JDK17/Android SDK36/Gradle dùng để build. GitHub Actions bị khóa ở cấp tài khoản; đã bổ sung [cấu hình và hướng dẫn Codemagic trên điện thoại](docs/CODEMAGIC.md). Chưa có lượt build Codemagic được xác minh. Các bài kiểm thử Kotlin đã viết vẫn cần chạy trên máy build/CI.
+**Log Codemagic do chủ dự án cung cấp xác nhận đã build debug APK và kiểm chữ ký v2 thành công.** Bước kiểm thử tiếp theo thất bại khi JUnit khởi tạo `RootManagerTest`; đã sửa hàm test trả về sai kiểu, đang chờ lượt chạy mới. Chưa xác nhận toàn bộ unit tests/lint đạt và chưa test APK trên điện thoại. Xem [bằng chứng lượt build đầu](verification/codemagic-first-build.json) và [hướng dẫn Codemagic](docs/CODEMAGIC.md).
 
 Xem [BUILD](docs/BUILD.md), [kiến trúc](docs/ARCHITECTURE.md), [định dạng pack](docs/PACK_FORMAT.md), [QA](docs/QA.md) và [tính năng/roadmap](docs/ROADMAP.md).
 
@@ -30,7 +30,7 @@ Cài **JDK17 đầy đủ**, Android SDK Platform36/BuildTools36 và Python3.9+;
 
 Windows dùng `gradlew.bat :app:assembleDebug :app:lintDebug`; shell fixture transaction/recovery cần Linux hoặc WSL có `/proc/self/fd` và GNU tools. Build APK, Kotlin unit tests và kiểm tra cấu trúc/bootstrap có thể chạy trên macOS. Hai file này là bootstrap tùy chỉnh tải Gradle8.11.1 từ nguồn chính thức và kiểm SHA-256, không giả làm official wrapper JAR. Có thể mở bằng Android Studio sau khi cấu hình Gradle/SDK, hoặc sinh wrapper chính thức theo BUILD.md.
 
-Nếu build đạt, APK tại `app/build/outputs/apk/debug/app-debug.apk`. Workflow `.github/workflows/android.yml` đã có cho repository của bạn; chưa có lần chạy CI nào được tuyên bố. Release cần keystore riêng qua biến môi trường; không kèm khóa ký sản xuất.
+APK debug nằm tại `app/build/outputs/apk/debug/app-debug.apk`. Codemagic đã chạy đến bước tạo APK; kết quả kiểm thử/lint vẫn cần đạt trong lượt tiếp theo. GitHub Actions hiện bị khóa ở cấp tài khoản. Release cần keystore riêng qua biến môi trường; không kèm khóa ký sản xuất.
 
 ## Dùng MVP
 

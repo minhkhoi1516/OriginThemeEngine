@@ -110,7 +110,7 @@ class Build:
             self.run("unit-tests-and-lint", gradle + [
                 ":core:root:test", ":engine:pack:test", ":data:testDebugUnitTest",
                 ":engine:device:testDebugUnitTest", ":app:testDebugUnitTest", ":app:lintDebug",
-            ] + options)
+            ] + options + ["--continue"])
             self.finished = True
             return 1 if self.failed else 0
         except (OSError, RuntimeError, ValueError) as error:

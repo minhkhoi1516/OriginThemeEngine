@@ -3,7 +3,9 @@
 GitHub Actions của chủ tài khoản đang bị disabled ở cấp tài khoản. Repo vẫn giữ
 nguyên; Codemagic tải source bằng Git và chạy trên máy build riêng.
 File `codemagic.yaml` đã định nghĩa workflow `ote-android-debug` / **OTE Android APK**.
-Cấu hình này chưa có lượt chạy Codemagic được xác minh và chưa chứng minh APK đã build thành công.
+Log lượt chạy đầu do chủ dự án cung cấp xác nhận tạo debug APK và kiểm chữ ký v2
+thành công. Unit verification dừng ở `RootManagerTest.initializationError`;
+bản sửa kiểu trả về của hàm test đang chờ chạy lại. Chưa kiểm thử app trên điện thoại.
 
 ## Thao tác một lần
 
@@ -61,5 +63,6 @@ bằng cùng một khóa riêng do chủ dự án giữ, hoặc cấu hình sign
 Pipeline giữ `apksigner.jar` công khai để hỗ trợ bước ký sau; không lưu khóa riêng
 trong Git, artifacts hay cache.
 
-Chưa thiết lập khóa ký ổn định và chưa có APK nào được bàn giao từ Codemagic.
+Chưa thiết lập khóa ký ổn định. APK debug đã được tạo theo log; artifact chưa
+được agent tải về/đối chiếu hash và toàn bộ verification chưa đạt.
 Không gỡ app/xóa dữ liệu để xử lý lỗi chữ ký khi chưa xuất các snapshot OTE cần giữ.
