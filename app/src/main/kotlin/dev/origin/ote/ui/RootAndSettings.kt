@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,16 +26,19 @@ fun RootScreen(viewModel: OteViewModel, onBackup: () -> Unit, onRestore: () -> U
     val current by viewModel.current.collectAsStateWithLifecycle()
     val busy by viewModel.busy.collectAsStateWithLifecycle()
     val history by viewModel.history.collectAsStateWithLifecycle()
+    var technicalDetails by rememberSaveable { mutableStateOf(false) }
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item { Text(stringResource(R.string.root_center), style = MaterialTheme.typography.headlineMedium) }
         item {
             OteSurface(prefs.style, prefs.reducedMotion, Modifier.fillMaxWidth()) {
                 Icon(Icons.Outlined.VerifiedUser, null, Modifier.size(36.dp))
-                Text(stringResource(when { !root.checked -> R.string.root_not_checked; root.available -> R.string.root_available; else -> R.string.root_unavailable }), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(R.string.root_lazy_explanation))
+                Text(stringResource(rootStatusText(root)), style = MaterialTheme.typography.titleLarge)
+                Text(stringResource(rootDetailText(root)))
                 if (root.checked) {
-                    Text(stringResource(R.string.root_manager_format, root.manager))
-                    if (root.detail.isNotBlank()) Text(root.detail, style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.root_manager_format,
+                        if (root.manager == "Unknown") stringResource(R.string.root_manager_unknown) else root.manager))
+                    TextButton(onClick = { technicalDetails = !technicalDetails }) { Text(stringResource(R.string.technical_details)) }
+                    if (technicalDetails && root.detail.isNotBlank()) Text(root.detail, style = MaterialTheme.typography.bodySmall)
                 }
                 Button(onClick = viewModel::checkRoot, enabled = !busy) { Text(stringResource(R.string.check_root)) }
             }
@@ -42,8 +46,13 @@ fun RootScreen(viewModel: OteViewModel, onBackup: () -> Unit, onRestore: () -> U
         item {
             OteSurface(prefs.style, prefs.reducedMotion, Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.compatibility), style = MaterialTheme.typography.titleLarge)
-                Text(stringResource(when (compatibility?.supported) { true -> R.string.profile_supported; false -> R.string.profile_unsupported; null -> R.string.compatibility_not_checked }))
-                compatibility?.checks?.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
+                Text(stringResource(when {
+                    root.checked && !root.available -> R.string.compatibility_root_required
+                    compatibility?.supported == true -> R.string.profile_supported
+                    compatibility?.supported == false -> R.string.profile_unsupported
+                    else -> R.string.compatibility_not_checked
+                }))
+                if (technicalDetails) compatibility?.checks?.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
                 Text(stringResource(R.string.aod_apply_unavailable), style = MaterialTheme.typography.bodySmall)
                 Text(stringResource(R.string.fp_apply_experimental), style = MaterialTheme.typography.bodySmall)
             }
@@ -75,13 +84,18 @@ fun RootScreen(viewModel: OteViewModel, onBackup: () -> Unit, onRestore: () -> U
         items(history.take(100), key = { it.id }) { entry ->
             OteSurface(prefs.style, prefs.reducedMotion, Modifier.fillMaxWidth()) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(entry.action, style = MaterialTheme.typography.titleSmall)
-                    val status = entry.status.uppercase(java.util.Locale.ROOT)
+                    val actionLabel = historyActionText(entry.action)
+                    Text(if (actionLabel != null) stringResource(actionLabel) else entry.action,
+                        modifier = Modifier.weight(1f).padding(end = 12.dp), style = MaterialTheme.typography.titleSmall)
+                    // Older builds logged check completion as success even if SU failed.
+                    val legacyRootCheck = entry.action == "ROOT_CHECK" && entry.status.equals("SUCCESS", true) && entry.detail.isBlank()
+                    val status = if (legacyRootCheck) "UNCERTAIN" else entry.status.uppercase(java.util.Locale.ROOT)
                     val label = when (status) {
                         "SUCCESS", "COMPLETED" -> stringResource(R.string.success)
                         "VERIFIED" -> stringResource(R.string.verified)
                         "UNCERTAIN" -> stringResource(R.string.uncertain)
                         "FAILED", "ERROR" -> stringResource(R.string.failed)
+                        "UNSUPPORTED" -> stringResource(R.string.status_unsupported)
                         else -> entry.status
                     }
                     Text(label, color = when (status) {
@@ -91,7 +105,7 @@ fun RootScreen(viewModel: OteViewModel, onBackup: () -> Unit, onRestore: () -> U
                     })
                 }
                 Text(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(entry.timestamp)), style = MaterialTheme.typography.bodySmall)
-                if (entry.detail.isNotBlank()) Text(entry.detail, style = MaterialTheme.typography.bodySmall)
+                if (technicalDetails && entry.detail.isNotBlank()) Text(entry.detail, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -110,6 +124,7 @@ fun SettingsScreen(viewModel: OteViewModel) {
                     ChoiceRow(stringResource(label), preferences.style == style) { update { it.copy(style = style) } }
                 }
                 Text(stringResource(R.string.glass_explanation), style = MaterialTheme.typography.bodySmall)
+                Text(stringResource(R.string.ui_implementation_notice), style = MaterialTheme.typography.bodySmall)
             }
         }
         item {

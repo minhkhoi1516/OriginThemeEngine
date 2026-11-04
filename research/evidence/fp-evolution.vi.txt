@@ -1,0 +1,165 @@
+PHÂN TÍCH HIỆU ỨNG VÂN TAY 进化 / 2003000011 — 2026-10-31
+
+KẾT QUẢ CHÍNH
+
+Gói đã cung cấp đủ để xác định cấu trúc tài nguyên: có 26 PNG trong suốt,
+atlas texture KTX2 và XML chứa tọa độ/đa giác của 26 sprite. Đây là gói có
+cấu hình và tài nguyên thật để nghiên cứu thay thế; chưa thử một hiệu ứng mod.
+Điểm chưa biết quan trọng nhất là engine chọn atlas hay từng PNG cho type=18.
+Không thể khẳng định sửa PNG riêng sẽ thay được hiệu ứng đang chạy.
+
+1. TỆP ĐẦU VÀO VÀ KIỂM TRA
+
+FP-2003000011-analysis.tar: 764416 byte.
+SHA-256: e664748d62d52daed7eb68340e0bbee9be32fcf694753386712c61cb1b9638d1
+Hai thành viên là file thường, mode 0777, uid/gid 10255/10255:
+  description.xml: 759 byte
+  content/animation.zip: 761220 byte
+TAR không phải bản sao lưu đầy đủ toàn thư mục hoặc SELinux context.
+
+animation.zip có magic ZIP hợp lệ, mở được bằng thư viện ZIP chuẩn.
+SHA-256: 050502563a6b1ee1e0904b74918c81d343cf4e76ff7f66791bb87055ad6fbbc4
+30 entry (29 file + 1 thư mục), tổng nội dung giải nén 2142335 byte.
+CRC mọi entry đạt; không có cờ mã hóa ZIP, đường thoát thư mục hoặc symlink
+trong các entry được kiểm tra. CRC không phải xác thực chữ ký/cấp phép.
+
+2. CÂY THƯ MỤC
+
+animation.zip
+  animation.xml
+  evolution/
+    evolution.ktx2
+    evolution.xml
+    evolution_1.png
+    evolution_2.png
+    ... đủ các số liên tiếp đến evolution_26.png
+
+Danh sách đầy đủ tên/kích thước/compression/CRC ở archive-tree.txt và audit.json.
+
+3. MANIFEST ĐIỀU KHIỂN
+
+animation.xml có nội dung:
+
+<animation type="18" name="evolution"
+ atlasData="evolution/evolution.xml"
+ atlasTexture="evolution/evolution.ktx2"
+ texture="evolution/evolution_{n}.png"
+ count="26" duration="32" height="600" width="600"/>
+
+Chứng minh trực tiếp:
+- Có khai báo hai cách biểu diễn: atlas và mẫu tên PNG rời.
+- count=26 khớp 26 PNG và 26 sprite trong atlas XML.
+- width/height=600 khớp kích thước từng PNG.
+
+Chưa được chứng minh:
+- type=18 được ánh xạ đến lớp renderer/backend nào.
+- duration=32 là thời gian mỗi frame, FPS hay quy ước riêng của parser.
+  Không đổi con số này thành khẳng định '32 FPS' hoặc '32ms/frame'.
+- 600 trong cấu hình có tương ứng 600 pixel trên màn hình hay bị scale.
+- Engine chọn đường atlas/PNG theo điều kiện nào; có fallback hay không.
+- Icon vân tay đứng chờ có nằm trong cùng đường render hay tài nguyên khác.
+
+4. 26 PNG
+
+Đã giải mã toàn bộ bằng Pillow: PNG thực, kích thước 600x600, palette mode P
+và có transparency. Sau khi chuyển để phân tích RGBA có alpha thực.
+Các frame thể hiện cụm sáng đỏ/xanh/vàng, khớp về hình thức với preview trong
+video người dùng. Đây là đối chiếu thị giác, không phải chứng minh đường load.
+Frame cuối có alpha tối đa chỉ 3/255, gần như đã mờ hết; không phải file lỗi
+chỉ vì dung lượng rất nhỏ (179 byte).
+
+png-and-atlas-audit.json ghi kích thước, alpha bbox/range và hình học từng frame.
+
+5. ATLAS XML VÀ KTX2
+
+evolution.xml ghi chú được xuất từ TexturePacker.
+TextureAtlas: imagePath=evolution.ktx2, width=2005, height=924.
+26 sprite có các thuộc tính:
+  n: tên frame
+  x/y/w/h: vùng chứa trong texture atlas
+  oX/oY: độ dời vùng đã cắt so với ảnh gốc
+  oW/oH: kích thước ảnh gốc 600x600
+và ba danh sách:
+  vertices: tọa độ các đỉnh ở hệ tọa độ frame gốc
+  verticesUV: tọa độ tương ứng trong atlas
+  triangles: các chỉ số đỉnh để dựng tam giác
+
+Đã kiểm tra tất cả sprite:
+- vùng x/y/w/h nằm trong texture 2005x924;
+- số phần tử vertices và verticesUV khớp theo cặp x/y;
+- triangles chia hết cho ba, mọi chỉ số nằm trong tập đỉnh;
+- UV.x = vertex.x + x - oX, UV.y = vertex.y + y - oY.
+- Vùng cắt atlas bao quanh vùng alpha của PNG với một ít lề trong mẫu;
+  không mặc định phần lề nhỏ này là sai khác hoặc lỗi gói.
+
+Ví dụ sprite đầu có vùng atlas (1608,700), kích thước 211x203, offset
+(189,198), ảnh gốc 600x600, 30 đỉnh và 28 tam giác.
+
+evolution.ktx2 có identifier KTX2 thật, không phải PNG đổi đuôi:
+  kích thước file 1855600 byte
+  pixelWidth/Height = 2005/924, khớp atlas XML
+  faceCount=1, levelCount=1, supercompressionScheme=0, vkFormat=0
+  DFD colorModel=166, khối texel 4x4, 16 byte/khối
+  level0: offset=208, length=1855392
+  ceil(2005/4) * ceil(924/4) * 16 = 1855392, khớp payload
+  KTXorientation=rd
+  KTXwriter=PVRTexLib v5.1.0
+
+Chưa decode KTX2 thành ảnh để so pixel với PNG; chưa tạo encoder hoặc atlas mới.
+Không dùng phần mềm đổi đuôi PNG thành .ktx2 rồi xem là tương thích.
+
+6. HỆ QUẢ ĐỐI VỚI HIỆU ỨNG MOD
+
+Hướng PNG rời:
+Nếu renderer thực sự đọc texture=evolution_{n}.png thì có cơ sở thay ảnh
+600x600 trong suốt giữ 26 frame. Điều kiện 'nếu' cần được xác minh bằng mã
+renderer hoặc thử nghiệm có backup và phục hồi. Chưa chọn đây là cách cài.
+
+Hướng atlas:
+Nếu renderer ưu tiên atlasTexture/atlasData thì phải giữ hai phần khớp nhau.
+Thay ảnh mới nhưng giữ đa giác cũ có thể làm phần hình mới bị cắt hoặc lệch.
+Đổi bố cục atlas mà không đổi UV/offset/triangles làm phép ánh xạ không còn đúng.
+Với hình mới cần xem xét đóng atlas và mesh mới; chưa có pipeline đã kiểm chứng.
+
+Hướng đổi type/fallback:
+Chưa biết ý nghĩa type=18 hoặc các type khác. Không đổi ngẫu nhiên type, xóa
+atlas để ép fallback hoặc chèn key cấu hình chưa được parser xác nhận.
+
+description.xml của gói ngoài:
+  id=1107432, uid=2003000011, edition=2, res_config_version=0
+  verify_file/vf_file = content/animation.zip
+Trường verify_file chứng minh gói chỉ định tài nguyên để kiểm tra, chưa chứng
+minh thuật toán, nơi kiểm tra hay điều kiện chấp nhận sau sửa. key không được
+thu thập và không được sửa; không giả định đóng ZIP lại là qua kiểm tra.
+id nội bộ 1107432 khác ID hiệu ứng/uid 2003000011, không được hoán đổi hai số.
+
+7. ENGINE CÒN THIẾU VÀ BƯỚC THU THẬP TỐI THIỂU
+
+Đã kiểm tra exact strings trong hai DEX NightPearl và bảy DEX iTheme đã có.
+Hai key udfp_* xuất hiện trong iTheme, phù hợp hàm applyFingerprint đã đọc.
+Không thấy exact strings atlasData/atlasTexture/TextureAtlas/animation.xml
+trong các DEX này. Kết quả tìm kiếm này không loại trừ native code, reflection,
+chuỗi sinh động hoặc plugin tải riêng. Chưa xác định package renderer.
+
+Lệnh đọc để tìm package ứng viên trên thiết bị, không giả định tên:
+  pm list packages -f | grep -iE 'systemui|fingerprint|biometric'
+
+Sau kết quả mới chọn đúng APK cần đọc parser/type/đường load và observer key.
+Không yêu cầu dump toàn hệ thống hoặc gửi lại các file đã cung cấp.
+
+8. RỦI RO VÀ PHẠM VI THỬ SAU NÀY
+
+Gói nguồn đang nằm trong /data của hệ sinh thái theme, không phải boot image.
+Việc phân tích offline ở lượt này không thay tệp hoặc settings trên máy.
+Chưa có cơ sở bảo đảm một gói mod không gây lỗi renderer hoặc giao diện khóa.
+Rủi ro cụ thể đã thấy từ cấu trúc: atlas/mesh lệch, codec sai, alpha sai, dữ
+liệu ZIP bị từ chối, metadata file không phù hợp và cache giữ bản cũ.
+
+Trước thử ghi cần có:
+- đường renderer và kiểm tra integrity được hiểu đủ;
+- bản gốc + hash + owner/mode/context thực tế, không phục hồi mù từ tar này;
+- phương án chuyển về hiệu ứng có sẵn/khôi phục khi gói không nạp;
+- chỉ thay một yếu tố, đo cả preview và mở khóa thật, không thay vùng quét,
+  độ sáng cảm biến hoặc cơ chế xác thực để thử đồ họa.
+
+Lượt này hoàn tất phân tích cấu trúc gói; chưa tạo hay cài hiệu ứng mod.

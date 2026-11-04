@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "root": "private-research",
+  "note": "Already supplied or assembled during research; originals stay private. Use these aliases only after verifying hashes. Missing original at prior attachment path does not invalidate retained analysis; no device partition collection needed.",
+  "files": [
+    {
+      "private_filename": "sample-original.itz",
+      "sha256": "b8aefa82bc08a25c829ee6a3d4d48816da386ff6fac1986b6632d913b73503b7",
+      "bytes": 11297609,
+      "role": "AOD pattern4 raw template",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "NightPearlUI-8.0.4.2.apk",
+      "sha256": "623f473bb5ec28ab5ada0fa37696ac88cb98a9b677384fb97ed61d733bda4e51",
+      "bytes": 49250967,
+      "role": "AOD parser/render code",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "iTheme-20.5.8.1.apk",
+      "sha256": "758a0b77ab59ec774c691b84153ae4ef927035d8298d34f1100d239580c5524e",
+      "bytes": 48607904,
+      "role": "iTheme catalog/download code",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "libvkrenderer.so",
+      "sha256": "b09c0bf2f741766dfdee669ba485da3eaa6692c72b525ac6abfb435e9d7edcdc",
+      "bytes": 1737840,
+      "role": "FP native renderer",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "FP-Evolution-original.zip",
+      "sha256": "050502563a6b1ee1e0904b74918c81d343cf4e76ff7f66791bb87055ad6fbbc4",
+      "bytes": 761220,
+      "role": "Owned FP base payload",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "SukiSU-reference.apk",
+      "sha256": "0c6c2db9fc591ff2441108e74e2def7fe5f785049be5b9c474312b6f381be5cf",
+      "bytes": 10689344,
+      "role": "UI static reference only",
+      "published": false,
+      "evidence": "Original currently readable in research workspace"
+    },
+    {
+      "private_filename": "FingerprintUI.apk",
+      "sha256": "172f48d73bda68d5b9a4324976471ea71a22220227ea317499a9b2f478cd4f31",
+      "bytes": 4419236,
+      "role": "FP Android renderer",
+      "published": false,
+      "evidence": "Original supplied earlier; hash from retained audit. Original attachment not available at its prior path in current workspace."
+    },
+    {
+      "private_filename": "AOD-1638987-original.tar",
+      "sha256": "5992dd571161b050ecbd4f41e02013eca397a12aff4f024bfbb71780d82b7afe",
+      "bytes": 11516928,
+      "role": "Installed AOD content comparison",
+      "published": false,
+      "evidence": "Original supplied earlier; hash from retained audit. Original attachment not available at its prior path in current workspace."
+    }
+  ]
+}

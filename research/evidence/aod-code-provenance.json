@@ -1,0 +1,33 @@
+{
+  "source_apk_sha256": "623f473bb5ec28ab5ada0fa37696ac88cb98a9b677384fb97ed61d733bda4e51",
+  "scope": "Static analysis of supplied APK. No new device trial or write.",
+  "files": {
+    "PATTERN4-CONTROLS.vi.txt": "b29ab1c17aea18c271a909662d6cd1992ed051bfeaba2d441dc494c3db008b29",
+    "a6_l_b.txt": "185fa31a1c0b9531de51190255de4ce37a529b1c437e8c9895058e7b135e2533",
+    "a6_v_E.txt": "39420abde4e9c8f124003d5b13cdc5a6badd870d7d14035095a5d0bf52c1f49e",
+    "a6_z0_k.txt": "c2fbdbba14b2bbfe92907e43c344306f354c3e2041938e6d2e1d1431ac343c71",
+    "caller-53653.txt": "5287d91d021306cba03fcfd16c13fef997667e09d28c8da474622cd6f2f6e6a8",
+    "caller-55984.txt": "0b50adf45e9af01a69fda0c979545fdefff4b5a422e2363429fd266075d6b166",
+    "caller-57557.txt": "64e44bf46f16619a8869b93568b10c2b065ab5e958918a4eb8bd1fc573760eff",
+    "caller-844.txt": "2329aa4de74e38342ff0335190462e44811888a764884db0f5476db971a7bfa8",
+    "com_vivo_nightpearl_view_CustomOnlineStyleView_k.txt": "0bf80af081050492526f75d01081d76632f74e55ee91f2868a49944bf2a8a529",
+    "com_vivo_nightpearl_view_CustomOnlineStyleView_m.txt": "897ec33b03fbb4082a46f1e6a2b0b6b93981a5ff2ef60c4cea80b3b3cfd7d386",
+    "com_vivo_nightpearl_view_CustomOnlineStyleView_n.txt": "a8e0a246b2d12ab44034b1b10159fb97c6fe4816229a475eb6e8812f1474801e",
+    "com_vivo_nightpearl_view_CustomOnlineStyleView_w.txt": "0eeb901311219d2d0db90523fb770a2c6f7ee30380eac10bf1f914404aa68f03",
+    "com_vivo_nightpearl_view_SequentialFrameView_setFiles.txt": "95d95d074a4fc90583d1a3a4d6684e0d468c48dd0537e91bdc18c08ae2ac4fcf",
+    "com_vivo_nightpearl_view_SequentialFrameView_setRepeatCount.txt": "65375577ec6a1d746518b76bdd15d818beb25e646f900cd47e874dcb1918456c",
+    "common_part_battery.xml": "503e14824634e713b36f67b64e7317252d6d5f586f3fa6432aab0017719627a4",
+    "config-getter-callers.json": "ed3024c80d672001bf58f373b8abe8e7f867dcd2a1c2b3cacf326a4194631f1a",
+    "getter-callers.csv": "89d1b6077cd006e357d5574d78ec3e20c521fdf2027b61f881769cf9939b6e5f",
+    "listener_a.txt": "a86ea2ffbcac5f47b86c4250b535c2504083dbb9f50ec422767932426585fbe5",
+    "listener_c.txt": "3d1c981a4fc6bdd94e9bbd38fa6598fe49cd21802da11e4f5f6fbcc0821b3765",
+    "online_pattern4.xml": "16fb5f1560b0b56dbda597b5a1c3889c35bfca009d67de58ce8cdf719576bb0e",
+    "online_pattern4_adapter_for_higher_than_1440.xml": "539b9e2ec86282ef7fa9c3172eb542f5058c6fa48d35dfd1a2125891b280dfda",
+    "online_pattern4_adapter_for_lower_than_1440.xml": "5d762257b0e3b2dab89ca25f231a757faa8e501210e3215d294ab08507f3954f",
+    "r4_h_constructor.txt": "c6a3c7fe125a89852c8e825b28ea246475a33aa118e9051d267abfa87d9710bc",
+    "r4_h_r.txt": "bcba20d050d29f33f4d08c984bbace5a3cefcb86b408a7e2d16184b586adc0e0",
+    "sequential_e.txt": "99798b9b7b2b92e467f49c5cfd909957afd2af12cd3862e3044117b9332d7dca",
+    "sequential_onDraw.txt": "43b76026572e556beb24ce5b98cdb292da785fec827e297d076eb1e742ee2a18",
+    "sequential_setInvalidateIntervalFromArray.txt": "4957d7e7bebb54555607f13466e903ebc343e7c4b1da601051521ea9f80872bb"
+  }
+}

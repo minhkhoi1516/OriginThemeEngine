@@ -1,0 +1,8 @@
+{
+  "tests_run": 7,
+  "failures": 0,
+  "platform": "Linux host",
+  "command": "python3 scripts/test_catalog_discovery.py",
+  "scope": "Actual fixed discovery shell; temp-directory fixtures, no SU. Does not prove Android SELinux or device catalog compatibility.",
+  "android_tested": false
+}

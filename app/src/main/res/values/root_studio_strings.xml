@@ -1,0 +1,21 @@
+<resources>
+    <string name="root_su_missing_title">SU is not accessible</string>
+    <string name="root_su_denied_title">SU launch was blocked</string>
+    <string name="root_verified_help">Root was verified for this check. Each device operation verifies access again.</string>
+    <string name="root_su_missing_help">OTE could not locate SU or its required interpreter. Check that root is active and OTE is allowed in your root manager.</string>
+    <string name="root_su_denied_help">The system blocked starting SU. Review access for OTE in your root manager and check whether temporary root is still active.</string>
+    <string name="root_su_invalid_help">The SU executable could not run in this environment. Export diagnostics to investigate.</string>
+    <string name="root_su_start_help">OTE could not start SU. Check root access for OTE, then retry or export diagnostics.</string>
+    <string name="root_timeout_help">The root request timed out. Its result is uncertain; inspect the current state before retrying a device change.</string>
+    <string name="root_cancelled_help">The root request was interrupted. Check root and the current operation state again.</string>
+    <string name="root_uid_help">OTE has not confirmed root access. Allow OTE in your root manager and retry while root is active.</string>
+    <string name="root_manager_unknown">Not identified</string>
+    <string name="compatibility_root_required">Root is required to inspect the active resource. Compatibility has not been verified.</string>
+    <string name="status_unsupported">Not compatible</string>
+    <string name="history_root_check">Root and compatibility check</string>
+    <string name="history_create_preset">Create animation preset</string>
+    <string name="technical_details">Technical details</string>
+    <string name="studio_panel_timeline">Timeline</string>
+    <string name="studio_panel_canvas">Canvas</string>
+    <string name="studio_panel_transform">Transform</string>
+</resources>

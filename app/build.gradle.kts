@@ -1,7 +1,7 @@
 plugins { id("com.android.application"); kotlin("android"); kotlin("plugin.serialization"); id("org.jetbrains.kotlin.plugin.compose"); id("com.google.devtools.ksp"); id("com.google.dagger.hilt.android") }
 android {
  namespace = "dev.origin.ote"; compileSdk = 36
- defaultConfig { applicationId = "dev.origin.ote"; minSdk = 33; targetSdk = 36; versionCode = 1; versionName = "0.1.0-mvp"; testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
+ defaultConfig { applicationId = "dev.origin.ote"; minSdk = 33; targetSdk = 36; versionCode = 2; versionName = "0.2.0-dev"; testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
  compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
  buildFeatures { compose = true; buildConfig = true }
  buildTypes { release { isMinifyEnabled = true; proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro") } }

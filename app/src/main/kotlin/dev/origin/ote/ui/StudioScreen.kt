@@ -24,12 +24,13 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
+fun StudioScreen(viewModel:OteViewModel,kind:dev.origin.ote.model.ThemeKind,initialId:String?=null,onExport:(String,StudioTransform)->Unit,
                  onImportPng:()->Unit,onImportGif:()->Unit) {
-    val themes by viewModel.themes.collectAsStateWithLifecycle()
+    val allThemes by viewModel.themes.collectAsStateWithLifecycle()
+    val themes = allThemes.filter { it.kind == kind }
     val prefs by viewModel.preferences.collectAsStateWithLifecycle()
     val busy by viewModel.busy.collectAsStateWithLifecycle()
-    var selectedId by rememberSaveable { mutableStateOf<String?>(null) }
+    var selectedId by rememberSaveable(kind, initialId) { mutableStateOf(initialId) }
     var editingId by rememberSaveable { mutableStateOf<String?>(null) }
     var themeMenu by remember { mutableStateOf(false) }
     var presetMenu by remember { mutableStateOf(false) }
@@ -37,6 +38,7 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
     var playing by rememberSaveable { mutableStateOf(true) }
     var playhead by rememberSaveable { mutableIntStateOf(0) }
     var showCenter by rememberSaveable { mutableStateOf(true) }
+    var panel by rememberSaveable { mutableIntStateOf(0) }
     var easing by rememberSaveable { mutableStateOf(StudioEasing.LINEAR) }
     val selected=themes.firstOrNull { it.id==selectedId }?:themes.firstOrNull()
     val sourceCanvas=selected?.manifest?.canvas
@@ -74,7 +76,8 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
     }
     LazyColumn(Modifier.fillMaxSize(),contentPadding=PaddingValues(16.dp),verticalArrangement=Arrangement.spacedBy(16.dp)) {
         item {
-            Text(stringResource(R.string.animation_studio),style=MaterialTheme.typography.headlineMedium)
+            Text(stringResource(if(kind==dev.origin.ote.model.ThemeKind.AOD) R.string.aod_studio_title else R.string.fp_studio_title),style=MaterialTheme.typography.headlineMedium)
+            if(kind==dev.origin.ote.model.ThemeKind.AOD) Text(stringResource(R.string.aod_studio_scope),style=MaterialTheme.typography.bodySmall)
             Text(stringResource(R.string.studio_timeline_subtitle),style=MaterialTheme.typography.bodyMedium)
         }
         item {
@@ -82,7 +85,7 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
                 FilledTonalButton(onClick=onImportPng,enabled=!busy,modifier=Modifier.weight(1f)) { Text(stringResource(R.string.import_png)) }
                 FilledTonalButton(onClick=onImportGif,enabled=!busy,modifier=Modifier.weight(1f)) { Text(stringResource(R.string.import_gif)) }
             }
-            Box {
+            if(kind==dev.origin.ote.model.ThemeKind.FINGERPRINT) Box {
                 TextButton(onClick={presetMenu=true},enabled=!busy) { Text(stringResource(R.string.studio_presets)) }
                 DropdownMenu(expanded=presetMenu,onDismissRequest={presetMenu=false}) {
                     PresetKind.entries.forEach { kind ->
@@ -123,6 +126,13 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
                 }
             }
             item {
+                TabRow(selectedTabIndex=panel) {
+                    listOf(R.string.studio_panel_timeline,R.string.studio_panel_canvas,R.string.studio_panel_transform).forEachIndexed { index,label ->
+                        Tab(selected=panel==index,onClick={panel=index},text={Text(stringResource(label))})
+                    }
+                }
+            }
+            if(panel==0) item {
                 OteSurface(prefs.style,prefs.reducedMotion,Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.timeline_title),style=MaterialTheme.typography.titleLarge)
                     if(total>1) Slider(value=playhead.toFloat().coerceIn(0f,(total-1).toFloat()),onValueChange={selectFrame(it.roundToInt())},
@@ -164,7 +174,7 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
                     Text(stringResource(R.string.timeline_native_timing_note),style=MaterialTheme.typography.bodySmall)
                 }
             }
-            item {
+            if(panel==1) item {
                 OteSurface(prefs.style,prefs.reducedMotion,Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.studio_canvas_title),style=MaterialTheme.typography.titleLarge)
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
@@ -178,7 +188,7 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
                     Text(stringResource(R.string.studio_canvas_help),style=MaterialTheme.typography.bodySmall)
                 }
             }
-            item {
+            if(panel==2) item {
                 OteSurface(prefs.style,prefs.reducedMotion,Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.keyframe_transform_title),style=MaterialTheme.typography.titleLarge)
                     val controlsPose=if(playing)StudioTimeline.poseAt(edit,playhead) else StudioTimeline.basePose(edit)
@@ -207,6 +217,10 @@ fun StudioScreen(viewModel:OteViewModel,onExport:(String,StudioTransform)->Unit,
                     }
                     Text(stringResource(R.string.keyframe_count_format,edit.keyframes.size),style=MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.keyframe_help),style=MaterialTheme.typography.bodySmall)
+                }
+            }
+            item {
+                OteSurface(prefs.style,prefs.reducedMotion,Modifier.fillMaxWidth()) {
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
                         OutlinedButton(onClick={
                             edit=StudioTransform();playhead=0

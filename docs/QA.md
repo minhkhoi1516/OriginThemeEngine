@@ -3,7 +3,7 @@
 ## Evidence labels
 
 - Source implementation is not compilation proof.
-- The second owner-supplied Codemagic log completed root/pack/data/Studio unit-test tasks and lint. PNG tests failed to compile in the Android module; their move to `engine:png` is pending a new run. See `verification/codemagic-second-build.json`.
+- The owner later reported a successful baseline build and supplied UI screenshots; final log/artifact not independently reviewed. The redesign branch needs a fresh compile/test run. See `verification/device-ui-smoke.json` and `docs/redesign/IMPLEMENTATION.vi.md`.
 - Host shell fixtures use real filesystem/rename/ZIP with Android identity and SELinux mocked, not real device QA.
 - OriginOS runtime/UI, GIF conversion performance, permission dialogs, Room migrations and native pack rendering require actual build/device testing.
 
@@ -35,3 +35,5 @@
 12. AOD write action must say unsupported; do not test mutation using an unimplemented adapter.
 
 No shell script from an imported pack may be executed. No boot/system/vendor/vbmeta or biometric enrollment writes are in scope.
+
+Redesign acceptance and PC commands: [implementation](redesign/IMPLEMENTATION.vi.md), [PC handoff](redesign/PC_HANDOFF.vi.md).

@@ -1,4 +1,4 @@
-# Origin Theme Engine — OTE 0.1 MVP
+# Origin Theme Engine — OTE 0.2 redesign source
 
 Mã nguồn Android Kotlin/Compose cho quản lý animation AOD và hiệu ứng vân tay OriginOS.
 Đây là **bản đang phát triển**, chưa hoàn thành toàn bộ master prompt.
@@ -16,7 +16,9 @@ Mã nguồn Android Kotlin/Compose cho quản lý animation AOD và hiệu ứng
 - Adapter FP có profile chính xác, PNG8 encoder thật, snapshot/journal, staging/rename/postcheck/rollback.
 - AOD apply/restore, layer/particle editor, factory restore khi không có snapshot gốc và community repository **chưa triển khai**. UI không báo giả thành công.
 
-**Log Codemagic mới xác nhận debug APK, chữ ký v2, test root/pack/data/Studio và lint đã qua.** Lỗi còn lại là test PNG không biên dịch được `javax.imageio` trong module Android. Đã chuyển encoder và toàn bộ năm test sang module JVM `engine:png`; đang chờ build lại để xác nhận toàn bộ verification. Chưa test APK trên điện thoại. Xem [bằng chứng lượt build mới](verification/codemagic-second-build.json) và [hướng dẫn Codemagic](docs/CODEMAGIC.md).
+**Bản đang bàn giao để tiếp tục trên PC:** [Bắt đầu tại đây](docs/redesign/START_HERE.vi.md). OTE tập trung AOD và hiệu ứng vân tay; SukiSU chỉ tham khảo giao diện, OTE không quản lý root/module/kernel.
+
+Baseline đã được chủ máy báo build thành công và cung cấp ảnh mở ứng dụng. Source mới đã tách hai workspace, bảng áp dụng và quét metadata nguồn; chưa biên dịch/chạy Kotlin tests hoặc thử trên máy cho nhánh này. Miuix/Glasmio thật, full AOD editor/apply và AI vẫn là phần triển khai tiếp theo. Xem [trạng thái chính xác](docs/redesign/IMPLEMENTATION.vi.md) và [bằng chứng UI bản trước](verification/device-ui-smoke.json).
 
 Xem [BUILD](docs/BUILD.md), [kiến trúc](docs/ARCHITECTURE.md), [định dạng pack](docs/PACK_FORMAT.md), [QA](docs/QA.md) và [tính năng/roadmap](docs/ROADMAP.md).
 
@@ -30,9 +32,9 @@ Cài **JDK17 đầy đủ**, Android SDK Platform36/BuildTools36 và Python3.9+;
 
 Windows dùng `gradlew.bat :app:assembleDebug :app:lintDebug`; shell fixture transaction/recovery cần Linux hoặc WSL có `/proc/self/fd` và GNU tools. Build APK, Kotlin unit tests và kiểm tra cấu trúc/bootstrap có thể chạy trên macOS. Hai file này là bootstrap tùy chỉnh tải Gradle8.11.1 từ nguồn chính thức và kiểm SHA-256, không giả làm official wrapper JAR. Có thể mở bằng Android Studio sau khi cấu hình Gradle/SDK, hoặc sinh wrapper chính thức theo BUILD.md.
 
-APK debug nằm tại `app/build/outputs/apk/debug/app-debug.apk`. Codemagic đã chạy đến bước tạo APK; kết quả kiểm thử/lint vẫn cần đạt trong lượt tiếp theo. GitHub Actions hiện bị khóa ở cấp tài khoản. Release cần keystore riêng qua biến môi trường; không kèm khóa ký sản xuất.
+APK debug nằm tại `app/build/outputs/apk/debug/app-debug.apk`. Nhánh redesign cần build/test riêng; bản build trước không xác minh thay đổi mới. GitHub Actions hiện bị khóa ở cấp tài khoản. Release cần keystore riêng qua biến môi trường; không kèm khóa ký sản xuất.
 
-## Dùng MVP
+## Chức năng nền hiện có
 
 1. Mở không cần SU. Tạo Soft Pulse hoặc nhập pack/GIF/PNG để xem và chỉnh trong Studio.
 2. Dùng SAF xuất pack; nhập pack đã xuất để lưu bản đã chỉnh vào thư viện.
@@ -71,7 +73,7 @@ Những kiểm tra này xác minh cấu trúc/resources/bootstrap và giao dịc
 ## Cấu trúc
 
 ```text
-app/                 Compose UI, ViewModel, DI, EN/VI/JA
+app/                 Compose workspaces/apply/device/settings, DI, EN/VI/JA
 core/model/          Domain models
 core/root/           SU process/runtime
 engine/pack/         Versioned secure pack parser/exporter
@@ -82,7 +84,7 @@ docs/                Architecture, schema, QA, roadmap, build
 scripts/             Bootstrap and host checks
 ```
 
-Các module rút gọn từ cấu trúc đề xuất để MVP dễ build, không đặt toàn bộ code vào một file. Chức năng chưa làm và các giới hạn không được che bằng dữ liệu mock.
+Các module tập hợp theo trách nhiệm để dễ build, không đặt toàn bộ code vào một file. Chức năng chưa làm và các giới hạn không được che bằng dữ liệu mock.
 
 ## Mã thông báo thường gặp
 

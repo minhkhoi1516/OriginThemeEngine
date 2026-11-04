@@ -1,0 +1,36 @@
+<resources>
+    <string name="workspaces_title">ワークスペース</string>
+    <string name="workspaces_subtitle">作りたいものを選びます。素材と編集ツールは種類ごとに分かれています。</string>
+    <string name="workspace_aod_description">AOD のサンプルからアニメーションを確認し、画像を編集します。</string>
+    <string name="workspace_fp_description">指紋センサーの周囲に表示するアニメーションを作成します。</string>
+    <string name="workspace_project_count">ライブラリに %1$d 件</string>
+    <string name="open_workspace">開く</string>
+    <string name="workspace_flow">素材を選択 → 編集 → プレビュー → 適用を確認</string>
+    <string name="open_workspace_studio">編集</string>
+    <string name="device_sources">端末上の素材</string>
+    <string name="aod_studio_title">AOD 画像スタジオ</string>
+    <string name="fp_studio_title">指紋エフェクトスタジオ</string>
+    <string name="aod_studio_scope">ここでは画像を書き出します。時計・電池の配置編集と完全な ITZ 出力は次の開発対象です。</string>
+    <string name="aod_source_help">先に iTheme でサンプルをダウンロードし、確認済みの保存先を調べます。</string>
+    <string name="fp_source_help">先に Vivo の指紋エフェクトをダウンロードして試します。適用には解析済みのベースのみを使用できます。</string>
+    <string name="scan_device_sources">root で確認</string>
+    <string name="catalog_scope">既知の場所からファイル名とサイズを読み取ります。この一覧からのコピー・完全な解析・編集は未接続です。</string>
+    <string name="catalog_not_scanned">ボタンを押すと読み取ります。起動時には自動確認しません。</string>
+    <string name="catalog_limited">読み取り上限に達したため、一覧は一部のみです。</string>
+    <string name="catalog_no_candidates">既知の場所では候補が見つかりません。未インストールであることを意味しません。</string>
+    <string name="catalog_bytes">%1$d バイト</string>
+    <string name="catalog_candidate_only">検出済み • 形式と適用互換性は未確認</string>
+    <string name="review_apply">適用内容を確認</string>
+    <string name="apply_center">適用</string>
+    <string name="apply_review_intro">ライブラリの項目を選び、変更前に適用先を確認します。</string>
+    <string name="apply_choose_project">このワークスペースの項目を選んでください。</string>
+    <string name="preview_scope">アプリ内プレビューです。Vivo 側の表示範囲や再生タイミングとは異なる場合があります。</string>
+    <string name="aod_apply_research_status">端末での過去の実験では AOD 素材の差し替えが動作しました。アプリの適用・復元処理は未完成のため、ここでは適用できません。</string>
+    <string name="fp_apply_steps">1. ダウンロード済みの「进化」を保持します。\n2. システム設定で指紋エフェクトを「なし」にします。\n3. OTE で root と互換性を確認します。\n4. 適用後、設定で「进化」を選び直してプレビューします。</string>
+    <string name="fp_none_acknowledgement">システム設定で「なし」を選びました。</string>
+    <string name="apply_after_review">確認に進む</string>
+    <string name="apply_backup_automatic">OTE は適用先を再確認し、書き込み前にバックアップします。更新後も実際の再生確認が必要です。</string>
+    <string name="ui_implementation_notice">現在の内蔵スタイルです。Miuix と Glasmio の正式な統合は PC 向け引き継ぎ仕様に記載され、このビルドには含まれません。</string>
+    <string name="history_catalog_scan">端末の素材を確認</string>
+    <string name="back">戻る</string>
+</resources>

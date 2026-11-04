@@ -9,3 +9,9 @@ local.properties
 .idea/
 .tooling/
 __pycache__/
+
+# Owner-private research and credentials
+private-research/
+.env
+.env.*
+!*.env.example

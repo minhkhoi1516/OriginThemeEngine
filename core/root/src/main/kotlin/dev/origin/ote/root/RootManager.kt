@@ -111,9 +111,10 @@ class RootManager(
                 startedProcess?.let { stopLocalClient(it) }
                 unavailable("cancelled_operation_state_unknown")
                 throw cancelled
-            } catch (_: IOException) {
-                unavailable("su_start_failed")
-                return@withLock RootResult(127, "", "su_start_failed", false)
+            } catch (error: IOException) {
+                val (code, reason) = suLaunchFailure(error)
+                unavailable(reason)
+                return@withLock RootResult(code, "", reason, false)
             } catch (_: SecurityException) {
                 unavailable("su_start_denied")
                 return@withLock RootResult(126, "", "su_start_denied", false)

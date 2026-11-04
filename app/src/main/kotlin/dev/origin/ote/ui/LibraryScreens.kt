@@ -33,7 +33,8 @@ fun ThemeFacts(item: ThemeItem) {
 @Composable
 fun LibraryScreen(kind: ThemeKind, viewModel: OteViewModel, onPreview: (ThemeItem) -> Unit,
                   onApply: (ThemeItem) -> Unit, onDelete: (ThemeItem) -> Unit, onExport: (ThemeItem) -> Unit,
-                  onImportPack: () -> Unit, onImportPng: () -> Unit, onImportGif: () -> Unit) {
+                  onImportPack: () -> Unit, onImportPng: () -> Unit, onImportGif: () -> Unit,
+                  onStudio: () -> Unit, onSources: () -> Unit) {
     val all by viewModel.themes.collectAsStateWithLifecycle()
     val prefs by viewModel.preferences.collectAsStateWithLifecycle()
     val root by viewModel.rootState.collectAsStateWithLifecycle()
@@ -48,6 +49,10 @@ fun LibraryScreen(kind: ThemeKind, viewModel: OteViewModel, onPreview: (ThemeIte
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(stringResource(if (kind == ThemeKind.AOD) R.string.aod_library else R.string.fingerprint_library),
             style = MaterialTheme.typography.headlineMedium)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilledTonalButton(onClick = onStudio) { Text(stringResource(R.string.open_workspace_studio)) }
+            OutlinedButton(onClick = onSources) { Text(stringResource(R.string.device_sources)) }
+        }
         OutlinedTextField(value = query, onValueChange = { query = it }, modifier = Modifier.fillMaxWidth(),
             singleLine = true, label = { Text(stringResource(R.string.search_themes)) },
             leadingIcon = { Icon(Icons.Outlined.Search, null) })
@@ -79,12 +84,12 @@ fun LibraryScreen(kind: ThemeKind, viewModel: OteViewModel, onPreview: (ThemeIte
         } else if (grid) {
             LazyVerticalGrid(columns = GridCells.Adaptive(160.dp), modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(bottom = 18.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(themes, key = { it.id }) { item -> ThemeCard(item, prefs, !busy && kind == ThemeKind.FINGERPRINT && root.available && compatibility?.supported == true,
+                items(themes, key = { it.id }) { item -> ThemeCard(item, prefs, !busy,
                     busy, onPreview, onApply, onDelete, onExport, { viewModel.favorite(item.id) }) }
             }
         } else {
             LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(bottom = 18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(themes, key = { it.id }) { item -> ThemeCard(item, prefs, !busy && kind == ThemeKind.FINGERPRINT && root.available && compatibility?.supported == true,
+                items(themes, key = { it.id }) { item -> ThemeCard(item, prefs, !busy,
                     busy, onPreview, onApply, onDelete, onExport, { viewModel.favorite(item.id) }) }
             }
         }
@@ -113,7 +118,7 @@ private fun ThemeCard(item: ThemeItem, prefs: AppPreferences, canApply: Boolean,
                 }
             }
         }
-        if (item.kind == ThemeKind.FINGERPRINT) Button(onClick = { onApply(item) }, enabled = canApply, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.apply_effect)) }
+        Button(onClick = { onApply(item) }, enabled = canApply, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.review_apply)) }
     }
 }
 
@@ -136,9 +141,9 @@ fun DashboardScreen(viewModel: OteViewModel, onNavigate: (String) -> Unit, onPre
             OteSurface(prefs.style, prefs.reducedMotion, Modifier.fillMaxWidth()) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Icon(Icons.Outlined.Security, null)
-                    Text(stringResource(when { !root.checked -> R.string.root_not_checked; root.available -> R.string.root_available; else -> R.string.root_unavailable }), style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(rootStatusText(root)), style = MaterialTheme.typography.titleMedium)
                 }
-                Text(stringResource(R.string.root_lazy_explanation))
+                Text(stringResource(rootDetailText(root)))
                 TextButton(onClick = { onNavigate("root") }) { Text(stringResource(R.string.open_root_center)) }
                 current?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
             }

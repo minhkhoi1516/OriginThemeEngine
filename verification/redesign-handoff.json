@@ -1,0 +1,7 @@
+{
+  "evidence_files": 8,
+  "local_links": 23,
+  "private_input_records": 8,
+  "upstream_files": 10,
+  "scope": "Document links and file hashes only; not source compilation, dependency resolution or device QA."
+}

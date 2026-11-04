@@ -1,0 +1,36 @@
+<resources>
+    <string name="workspaces_title">Không gian sáng tạo</string>
+    <string name="workspaces_subtitle">Chọn nội dung bạn muốn thiết kế. Mỗi nơi có thư viện và công cụ riêng.</string>
+    <string name="workspace_aod_description">Bắt đầu từ mẫu AOD, xem hoạt ảnh và chỉnh phần hình ảnh của bạn.</string>
+    <string name="workspace_fp_description">Thiết kế hoạt ảnh xuất hiện quanh vị trí cảm biến vân tay.</string>
+    <string name="workspace_project_count">%1$d mục trong thư viện</string>
+    <string name="open_workspace">Mở không gian</string>
+    <string name="workspace_flow">Chọn nguồn → chỉnh sửa → xem trước → kiểm tra áp dụng.</string>
+    <string name="open_workspace_studio">Chỉnh sửa</string>
+    <string name="device_sources">Có trên máy</string>
+    <string name="aod_studio_title">Thiết kế hình ảnh AOD</string>
+    <string name="fp_studio_title">Thiết kế hiệu ứng vân tay</string>
+    <string name="aod_studio_scope">Nơi này xuất phần hình ảnh. Chỉnh đồng hồ thật, bố cục pin và xuất ITZ đầy đủ thuộc phần phát triển tiếp theo.</string>
+    <string name="aod_source_help">Tải mẫu trong iTheme trước. Quét vị trí tải đã xác minh để liệt kê các tệp ITZ có thể phân tích.</string>
+    <string name="fp_source_help">Tải và thử một hiệu ứng vân tay Vivo trước. Hiện chỉ mẫu nền đã nghiên cứu được hỗ trợ cho bước áp dụng.</string>
+    <string name="scan_device_sources">Quét bằng root</string>
+    <string name="catalog_scope">Đọc tên và dung lượng tệp ở vị trí đã biết. Chép mẫu, phân tích đầy đủ và mở chỉnh sửa từ danh sách này chưa được nối vào ứng dụng.</string>
+    <string name="catalog_not_scanned">Bấm Quét để đọc danh sách. Ứng dụng chưa tự quét khi mở.</string>
+    <string name="catalog_limited">Danh sách đã chạm giới hạn đọc và có thể chưa đầy đủ.</string>
+    <string name="catalog_no_candidates">Chưa thấy tệp phù hợp ở vị trí đã biết. Điều này không có nghĩa máy chưa cài theme.</string>
+    <string name="catalog_bytes">%1$d byte</string>
+    <string name="catalog_candidate_only">Đã tìm thấy tệp • chưa xác minh định dạng và khả năng áp dụng</string>
+    <string name="review_apply">Kiểm tra áp dụng</string>
+    <string name="apply_center">Áp dụng</string>
+    <string name="apply_review_intro">Chọn mục trong thư viện và kiểm tra đích trước khi thay đổi trên máy.</string>
+    <string name="apply_choose_project">Chọn một mục của không gian này trước.</string>
+    <string name="preview_scope">Xem trước trong ứng dụng; vùng hiển thị và lịch phát thật của Vivo có thể khác.</string>
+    <string name="aod_apply_research_status">Thay tài nguyên AOD đã hoạt động trong các thử nghiệm trước trên máy. Luồng ghi và khôi phục trong ứng dụng chưa hoàn thiện nên chưa mở áp dụng ở đây.</string>
+    <string name="fp_apply_steps">1. Giữ mẫu 进化 / Phát triển đã tải trên máy.\n2. Chọn Không có trong cài đặt hiệu ứng vân tay.\n3. Kiểm tra root và tương thích trong OTE.\n4. Áp dụng rồi chọn lại Phát triển ở cài đặt hệ thống để xem trước.</string>
+    <string name="fp_none_acknowledgement">Tôi đã chọn Không có ở cài đặt hệ thống.</string>
+    <string name="apply_after_review">Tiếp tục xác nhận</string>
+    <string name="apply_backup_automatic">OTE kiểm tra đích và tạo bản sao trước khi ghi. Sau khi cập nhật tệp vẫn cần xem lại hoạt ảnh thực tế.</string>
+    <string name="ui_implementation_notice">Đây là các phong cách hiện có. Tích hợp thư viện Miuix và Glasmio thật đã được đặc tả trong bộ bàn giao máy tính, chưa có trong bản này.</string>
+    <string name="history_catalog_scan">Đọc nguồn trên máy</string>
+    <string name="back">Quay lại</string>
+</resources>

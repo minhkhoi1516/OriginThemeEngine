@@ -65,14 +65,17 @@ class Build:
     def execute(self):
         try:
             self.run("source-checks", [sys.executable, "scripts/validate_project.py"])
+            self.run("handoff-checks", [sys.executable, "scripts/validate_handoff.py"])
             self.run("bootstrap-tests", [sys.executable, "scripts/test_gradle_bootstrap.py"])
             if platform.system() == "Linux" and Path("/proc/self/fd").is_dir():
                 self.run("transaction-fixtures", [sys.executable, "scripts/test_device_transaction.py"])
                 self.run("recovery-fixtures", [sys.executable, "scripts/test_device_recovery.py"])
+                self.run("catalog-fixtures", [sys.executable, "scripts/test_catalog_discovery.py"])
             else:
                 self.record("transaction-fixtures", "skipped",
                             reason="Requires Linux /proc/self/fd and GNU tools; not an Android device test.")
                 self.record("recovery-fixtures", "skipped", reason="Requires the Linux transaction fixture.")
+                self.record("catalog-fixtures", "skipped", reason="Requires GNU stat/readlink host fixtures.")
 
             self.env = gradle_bootstrap.require_jdk17()
             sdk_value = self.env.get("ANDROID_HOME") or self.env.get("ANDROID_SDK_ROOT")

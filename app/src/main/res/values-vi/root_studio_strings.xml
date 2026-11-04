@@ -1,0 +1,21 @@
+<resources>
+    <string name="root_su_missing_title">Chưa truy cập được SU</string>
+    <string name="root_su_denied_title">Khởi chạy SU bị chặn</string>
+    <string name="root_verified_help">Quyền root đã được xác nhận ở lần kiểm tra này. Mỗi thao tác trên thiết bị sẽ kiểm tra quyền lại.</string>
+    <string name="root_su_missing_help">OTE chưa tìm được SU hoặc trình thực thi cần thiết. Kiểm tra root còn hoạt động và OTE đã được cho phép trong trình quản lý root.</string>
+    <string name="root_su_denied_help">Hệ thống chặn khởi chạy SU. Kiểm tra quyền của OTE trong trình quản lý root và trạng thái root tạm thời.</string>
+    <string name="root_su_invalid_help">Lệnh SU không chạy được trong môi trường hiện tại. Xuất chẩn đoán để kiểm tra nguyên nhân.</string>
+    <string name="root_su_start_help">OTE chưa khởi chạy được SU. Kiểm tra quyền root của OTE, sau đó thử lại hoặc xuất chẩn đoán.</string>
+    <string name="root_timeout_help">Yêu cầu root hết thời gian chờ. Kết quả chưa rõ; kiểm tra trạng thái hiện tại trước khi thử lại thao tác thay đổi thiết bị.</string>
+    <string name="root_cancelled_help">Yêu cầu root bị gián đoạn. Kiểm tra lại quyền root và trạng thái thao tác hiện tại.</string>
+    <string name="root_uid_help">OTE chưa xác nhận được quyền root. Cho phép OTE trong trình quản lý root rồi thử lại khi root còn hoạt động.</string>
+    <string name="root_manager_unknown">Chưa nhận diện</string>
+    <string name="compatibility_root_required">Cần quyền root để đọc tài nguyên đang dùng. Chưa xác minh được tính tương thích.</string>
+    <string name="status_unsupported">Chưa tương thích</string>
+    <string name="history_root_check">Kiểm tra root và tương thích</string>
+    <string name="history_create_preset">Tạo mẫu hoạt ảnh</string>
+    <string name="technical_details">Chi tiết kỹ thuật</string>
+    <string name="studio_panel_timeline">Timeline</string>
+    <string name="studio_panel_canvas">Khung hình</string>
+    <string name="studio_panel_transform">Biến đổi</string>
+</resources>

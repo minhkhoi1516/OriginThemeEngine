@@ -1,0 +1,196 @@
+NGHIÊN CỨU TIẾP AOD PATTERN 4 — 2026-10-31
+Thiết bị đối chiếu: iQOO Z10 Turbo Pro, OriginOS 6 China, Android 16.
+Nguồn mã: NightPearlUI 8.0.4.2 người dùng cung cấp; mẫu ITZ 1638987;
+log truy vấn database và hash ITZ của người dùng ngày 2026-10-31.
+
+KẾT QUẢ ĐÃ CHỐT
+
+1. Sửa tài nguyên đã giải nén hoạt động trên bản thử Waguri. Gói ITZ tải xuống
+   vẫn trùng SHA-256 với mẫu gốc. Chưa kiểm chứng nhập ITZ có ID mới.
+2. Pattern 4 có cấu hình thật cho vị trí ảnh, từng chữ số, ngày tháng, pin,
+   ảnh trang trí tĩnh và thời gian từng frame.
+3. Có giới hạn bố cục trong engine. Không thể xem width/height JSON là kích
+   thước canvas tự do hoặc tăng maxHeight là đương nhiên tăng vùng hiển thị.
+4. Xem trước và AOD thật có chế độ chạy khác nhau, gồm cơ chế lặp/hiệu ứng.
+
+Đây là nghiên cứu tĩnh. Các thay đổi đồng hồ/pin/trang trí dưới đây chưa được
+thử trên máy. Lượt này không tạo gói cài, không chạy root script và không ghi
+tài nguyên trên thiết bị.
+
+A. BẢNG THAM SỐ CÓ ĐƯỜNG XỬ LÝ TRONG MÃ
+
+Nhân vật/nền động:
+- hasBackgroundWall: điều kiện bật nhánh nền.
+- backgroundWall.dynamic: chọn nhánh hoạt ảnh hoặc nền tĩnh.
+- backgroundWall.image: danh sách tên frame; đường dẫn nối vào thư mục tài nguyên.
+- backgroundWall.duration: danh sách thời gian frame, chuyển sang mảng int.
+- backgroundWall.left/top: parse số nguyên và đặt margin của view.
+- backgroundWall.lastImage: tên ảnh sau khi kết thúc; cần đối chiếu giá trị
+  mặc định của bean khi thiếu key. Mẫu hiện tại dùng background.png theo
+  kết quả nghiên cứu trước; không coi image[-1] tự động là lastImage.
+
+Đồng hồ số:
+- clockStyle: có nhánh digit/analog trong mã; chuyển sang analog còn cần
+  cấu hình và tài nguyên riêng, không chỉ đổi một chuỗi.
+- digitClock.hour0/hour1/minute0/minute1/split.left/top: vị trí từng ImageView.
+- các visible tương ứng: có đường đặt visibility.
+- time_0.png đến time_9.png và time_dot.png: tên tài nguyên được a6.v.B dựng.
+  Có thể thiết kế kiểu chữ bằng bitmap; chưa thử bộ chữ số mới trên máy.
+  Tăng kích thước glyph cần thử mốc 00:00, 11:11, 23:59 và chế độ 12/24 giờ.
+
+Ngày tháng/thứ/AM-PM:
+- hasTime, timeStyle: có nhánh xử lý, gồm các chuỗi single/multiple/all.
+- time.date/week/am_pm/date_week/all: các nhánh tương ứng đọc visible,
+  left/top; các nhánh cỡ chữ đọc textSize và gọi TextView.setTextSize.
+- Trong initView, đối số unit của setTextSize là 1 (Android DIP/dp), không
+  phải lời gọi setTextSize một đối số mặc định sp. Ví dụ textSize="12"
+  không có nghĩa chắc chắn 12 pixel màn hình.
+- Nội dung thật được cập nhật từ helper thời gian và DateFormat; không cần
+  đóng cứng giờ hoặc ngày vào animation. Chưa xác minh một key JSON đổi màu
+  hoặc nạp font chữ tùy ý cho những TextView này.
+
+Pin:
+- hasBattery và battery.visible: có đường kiểm tra/ẩn hiện.
+- battery.left/top: đặt margin của khối pin.
+- battery.gravity: gọi LinearLayout.setGravity, tác động nội dung trong khối.
+- Chiều rộng khối được gán bằng helper a6.l.a: nhánh thông thường 400,
+  nhánh width==1440 là 533. Không mặc định redBorderWidth điều khiển nó.
+- Phần trăm và trạng thái sạc được cập nhật từ dữ liệu engine.
+- Hình pin có nhánh lấy R.drawable trong APK; BatteryBean đã đọc không có
+  src/icon. Chưa chứng minh cơ chế nạp icon pin tùy chỉnh qua mẫu này.
+  Sticker hình pin là đồ trang trí, không tự phản ánh mức pin thật.
+
+Ảnh trang trí:
+- hasChartlet và chartlet.item[].src/left/top: có nhánh nạp bitmap, tạo
+  ImageView, thêm vào fl_custom_area và đặt margin.
+- Có cơ sở cho sticker tĩnh trong suốt; chưa chứng minh sticker động độc lập.
+- Thêm file mới cần quy trình backup/restore riêng; installer thử Waguri
+  hiện chỉ thay danh sách file cũ, không dùng nguyên nó để thêm sticker.
+
+B. CÁC KEY CHƯA ĐỦ CƠ SỞ ĐƯA THÀNH NÚT CHỈNH
+
+Đã đối chiếu 122 hàm getter của ConfigBean và các bean con trong cả hai DEX.
+Những getter sau không có direct method reference trong chỉ mục đã đọc:
+  ConfigBean.getWidth, getHeight, getAlpha
+  BackgroundWallBean.getWidth, getHeight
+  BatteryBean.getTextSize
+  ChartletBean.ItemBean.getDynamic
+
+Điều này cho thấy các key tương ứng không có đường gọi getter thông thường
+được tìm thấy. Nó không loại trừ tuyệt đối reflection, truy cập field hoặc
+hành vi framework ngoài APK. Không xóa các key khỏi mẫu chỉ vì kết quả này.
+Đặc biệt, có key trong JSON hoặc có getter không đồng nghĩa key có tác dụng.
+Chi tiết từng caller/code offset/PC: config-getter-callers.json.
+
+C. KÍCH THƯỚC TRÊN MÁY 1260 PX: BA BƯỚC KHÁC NHAU
+
+W dưới đây là độ rộng do a6.z0.k(context) trả về, không tự động coi mọi context
+đều trùng kết quả wm size. Hàm lấy Display.getRealMetrics và min(width,height).
+Có nhánh riêng cho thiết bị được nhận diện foldable qua FtDeviceInfo.
+
+Ở nhánh thông thường, không foldable:
+
+Chọn tài nguyên (a6.v.E):
+  W < 1440 -> thư mục 1080
+  W >= 1440 -> thư mục 1440
+
+Chọn layout (CustomOnlineStyleView.m):
+  W == 1080 hoặc W == 1440 -> online_pattern4
+  W khác hai giá trị trên và W < 1440 -> adapter_for_lower_than_1440
+  W > 1440 -> adapter_for_higher_than_1440
+
+XML adapter thấp có layout_width="1080.0px".
+XML adapter cao có layout_width="1440.0px".
+Đây là đơn vị px, không phải dp. Không có phép scale theo width JSON trong
+nhánh chọn layout này. Chưa đo phép biến đổi tại view cha ngoài nhánh này.
+
+Chiều cao vùng fl_custom_area:
+  limit(W) = 1200 nếu W == 1440, còn lại 900
+  areaHeight = min(int(config.maxHeight), limit(W))
+
+Vì vậy nếu context hiện tại trả W=1260, nhánh thường dùng tài nguyên 1080,
+adapter ngang 1080px và giới hạn chiều cao 900px. Màn hình 1260x2800 không
+đồng nghĩa canvas của mẫu là 1260x2800. Đây là kết quả theo nhánh mã, chưa
+phải phép đo pixel/chụp AOD trên máy. Các điều kiện dùng >= và == ở các bước
+khác nhau; không gộp chúng thành một quy tắc chung cho mọi thiết bị.
+
+Đối với animation, SequentialFrameView.onMeasure gọi helper e:
+  nếu MeasureSpec.EXACTLY: dùng kích thước spec;
+  các mode khác: lấy min(kích thước bitmap đã lưu, kích thước spec).
+Không lấy backgroundWall.width/height qua getter để đo trong đường này.
+Ảnh lớn vẫn có thể bị giới hạn bởi view cha và clipping.
+
+Hệ quả thực tế cho mục tiêu AOD lớn:
+- Hướng thay animation trong vùng mẫu 1080 là hướng đã có thử nghiệm thành công.
+- Muốn tăng vùng từ mức GIF editor lên vùng mẫu online: khác biệt nhánh render
+  đã có bằng chứng; không cần kết luận sửa ROM để giải thích bản thử thành công.
+- Muốn vượt tiếp giới hạn vùng pattern 4: tăng JSON đơn thuần chưa có cơ sở.
+  Cần phép đo và/hoặc một pattern được hỗ trợ khác; không đổi pattern ngẫu nhiên.
+
+D. THỜI GIAN FRAME, LẶP VÀ HIỆU ỨNG XEM TRƯỚC
+
+CustomOnlineStyleView.m đọc duration -> mảng int -> setInvalidateIntervalFromArray.
+Setter nhận mảng khớp số frame; nếu số frame đã có và độ dài mảng sai,
+setter bỏ mảng. Không có clamp min(33,...) hoặc max(33,...) trong setter này.
+Trong onDraw, phần tử duration được gán cho khoảng hẹn C; Handler dùng
+sendEmptyMessageDelayed với khoảng đó. 33ms xuất hiện như giá trị mặc định.
+Không được diễn giải 33ms thành giới hạn FPS chung của panel hay toàn engine.
+Thời gian thực vẫn phụ thuộc giải mã ảnh, lịch vẽ, màn hình và quản lý năng lượng.
+Chưa thử FPS mới, không đề xuất duration=0 hoặc số âm.
+
+setRepeatCount(1) ghi E=1. Trong onDraw, hết một lượt tăng F và dừng khi
+E!=0 && F>=E. Như vậy mã lớp này dừng sau một lượt mỗi lần start theo đường
+này; không phải quy ước 'lặp thêm một lượt' của một số API animation khác.
+Các lời gọi start khác ở lớp ngoài vẫn có thể phát lại.
+
+Đã xác định hai caller:
+- ScreenOffClockView.B truyền đối số chế độ cuối=2 vào CustomOnlineStyleView.
+- StyleSettingsActivity.N0 truyền chế độ cuối=3.
+Constructor lưu đối số cuối vào field c.
+
+onSequentialFrameAnimationEnd (n) nạp lastImage. Chỉ khi c==0 hoặc c==3 mới
+đi vào vòng kết thúc có fade/restart sau đó. Với c==2 nhánh này trả về sau
+xử lý ảnh kết thúc; nó không tự chạy vòng fade/restart này.
+
+Vòng xem trước khi chưa bị dừng:
+  kết thúc lượt -> hẹn 1002 sau 1000ms
+  -> k(): ValueAnimator alpha 1 xuống 0, duration 500ms
+  -> listener c khi alpha==0 xóa drawable và hẹn 1001 sau 500ms
+  -> j(): alpha=1, SequentialFrameView.g() phát lại.
+q/mStopAnimation và các điều kiện lifecycle có thể ngắt vòng.
+
+Vì vậy xem trước lặp đẹp không chứng minh AOD thật lặp tương tự.
+Chưa tìm thấy tham số JSON cho các khoảng 1000/500/500ms hoặc repeatCount
+trong nhánh này. Không đưa các trường fadeDuration/loopCount tự nghĩ ra vào gói.
+Hiệu ứng dựng sẵn trong frame vẫn là hướng thiết kế phù hợp với renderer
+chuỗi ảnh; hiệu ứng phản ứng theo pin/giờ/sạc cần cơ chế runtime riêng.
+
+E. BẰNG CHỨNG VÀ GIỚI HẠN
+
+- a6.z0.k: code_off 0x1c25dc; a6.l.b: 0x1ab5a8.
+- a6.v.E: 0x1b3d50.
+- CustomOnlineStyleView.m: 0x539c04, PC 0032-0063 chọn layout;
+  07ca-0801 giới hạn chiều cao; 05e4-05f1 ví dụ cỡ chữ dp.
+- SequentialFrameView.e: 0x56e50c; onMeasure: 0x56eb10;
+  onDraw: 0x56e708; setInvalidateIntervalFromArray: 0x56ef48.
+- ScreenOffClockView.B: 0x565624; PC 0094 đặt v14=2, 0254 truyền vào constructor.
+- StyleSettingsActivity.N0: xem caller-53653.txt, PC 007a đặt 3, 008f truyền vào.
+- CustomOnlineStyleView.n: 0x53b948; k: 0x539b94;
+  listener c.onAnimationUpdate: 0x539704; handler a: 0x5395f8.
+- r4.h constructor: n khởi tạo false, sau đó so getDeviceType với "foldable".
+
+Văn bản dump kèm theo có code offset và PC để kiểm tra lại. Chỉ mục direct
+reference không thay thế mọi phân tích luồng điều khiển. Không có thử nghiệm
+về mức pin, lưu ảnh OLED, FPS hay kích thước mới trong lượt này.
+
+F. THỬ NGHIỆM TIẾP THEO ĐƯỢC THIẾT KẾ
+
+Chưa cần thêm dữ liệu hoặc lệnh root để hoàn thành bảng tham số này.
+Khi chuyển sang bản thử mới, nên giữ animation Waguri làm chuẩn và thay
+một nhóm trước: bộ chữ số/vị trí, rồi ngày tháng, rồi vị trí pin.
+Thử sticker có file mới là bước riêng vì backup/restore phải biết file thêm.
+Thử thay kích thước bitmap tách khỏi thay maxHeight, có mốc so sánh cố định.
+Chưa đặt các thông số chưa có đường xử lý vào builder.
+
+Không hứa vượt được mọi giới hạn engine hoặc đạt tính năng tương đương mọi
+AOD của nhà phát triển iTheme chỉ từ kết quả thay tài nguyên hiện có.

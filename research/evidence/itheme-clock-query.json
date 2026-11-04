@@ -1,0 +1,12 @@
+{
+  "source": "1-aShellYou__20261031160911.txt",
+  "source_sha256": "e701f5860878c5d43cc7b7cb26dc6b8b3a62ee759ec6bc1bb7ff933833d14c07",
+  "row": {
+    "uid": "1638987",
+    "resId": "700076480",
+    "filename": "/data/bbkcore/theme//.dwd/c/o/m/b/b/k/t/h/e/m/e/C/动态黑塔少女 揭露.itz",
+    "state": 3
+  },
+  "verified": "Provider query returned this row on user device. Presence/bytes of filename have not yet been independently verified. state=3 is raw value, not evidence of purchase or authentication.",
+  "reference_itz_sha256": "b8aefa82bc08a25c829ee6a3d4d48816da386ff6fac1986b6632d913b73503b7"
+}

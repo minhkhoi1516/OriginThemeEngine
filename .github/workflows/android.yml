@@ -47,6 +47,8 @@ jobs:
           python3 scripts/test_gradle_bootstrap.py
           python3 scripts/test_device_transaction.py
           python3 scripts/test_device_recovery.py
+          python3 scripts/test_catalog_discovery.py
+          python3 scripts/validate_handoff.py
       - name: Build installable debug APK
         run: |
           chmod +x gradlew

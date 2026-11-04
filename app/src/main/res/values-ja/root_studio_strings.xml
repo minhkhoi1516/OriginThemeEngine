@@ -1,0 +1,21 @@
+<resources>
+    <string name="root_su_missing_title">SU にアクセスできません</string>
+    <string name="root_su_denied_title">SU の起動がブロックされました</string>
+    <string name="root_verified_help">今回の確認で root 権限を確認しました。端末操作のたびに権限を再確認します。</string>
+    <string name="root_su_missing_help">SU または必要な実行環境が見つかりません。root が有効で、管理アプリが OTE を許可しているか確認してください。</string>
+    <string name="root_su_denied_help">システムが SU の起動を拒否しました。管理アプリの OTE 権限と一時 root の状態を確認してください。</string>
+    <string name="root_su_invalid_help">この環境では SU を実行できません。原因を調べるには診断情報を書き出してください。</string>
+    <string name="root_su_start_help">SU を起動できませんでした。OTE の root 権限を確認し、再試行するか診断情報を書き出してください。</string>
+    <string name="root_timeout_help">root 要求がタイムアウトしました。結果は未確定です。端末の変更を再試行する前に現在の状態を確認してください。</string>
+    <string name="root_cancelled_help">root 要求が中断されました。権限と現在の操作状態を再確認してください。</string>
+    <string name="root_uid_help">root 権限を確認できませんでした。管理アプリで OTE を許可し、root が有効な状態で再試行してください。</string>
+    <string name="root_manager_unknown">未識別</string>
+    <string name="compatibility_root_required">使用中のリソースを調べるには root が必要です。互換性は未確認です。</string>
+    <string name="status_unsupported">非対応</string>
+    <string name="history_root_check">root と互換性の確認</string>
+    <string name="history_create_preset">アニメーションの作成</string>
+    <string name="technical_details">技術情報</string>
+    <string name="studio_panel_timeline">タイムライン</string>
+    <string name="studio_panel_canvas">キャンバス</string>
+    <string name="studio_panel_transform">変形</string>
+</resources>

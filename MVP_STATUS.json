@@ -1,8 +1,8 @@
 {
-  "version": "0.1.0-mvp",
+  "version": "0.2.0-dev",
   "created_utc": "2026-11-01T13:42:12.508775+00:00",
   "implemented_source": [
-    "Compose six screens",
+    "Compose AOD/FP workspaces + apply/device/settings",
     "Room/DataStore/SAF/Hilt",
     "secure otepacks",
     "PNG/GIF/nativeFP/pattern4ITZ-preview import",
@@ -16,19 +16,25 @@
     "output canvas resizing/artwork anchor editor",
     "baked transform keyframes and easing",
     "nine original procedural Canvas presets",
-    "156 EN/VI/JA resource keys with full resource parity checks"
+    "209 EN/VI/JA resource keys with full resource parity checks",
+    "root-readiness result/history gating and sanitized SU launch diagnostics",
+    "three Studio tool panels with shared export/reset",
+    "mode-isolated Studio navigation/import",
+    "read-only bounded device source metadata catalog",
+    "review screen with explicit FP instructions"
   ],
   "executed_host_checks": {
     "transactions": 21,
     "recovery": 8,
     "bootstrap": 6,
-    "structure": 8
+    "structure": 8,
+    "catalog": 7
   },
-  "kotlin_test_methods_written": 57,
-  "kotlin_tests_run": true,
-  "kotlin_compilation_verified": true,
-  "android_dependency_resolution_verified": true,
-  "debug_apk_built": true,
+  "kotlin_test_methods_written": 71,
+  "kotlin_tests_run": false,
+  "kotlin_compilation_verified": false,
+  "android_dependency_resolution_verified": false,
+  "debug_apk_built": false,
   "release_apk_built": false,
   "android_device_tested": false,
   "not_implemented": [
@@ -36,17 +42,33 @@
     "backup import",
     "factory/default restore without original snapshot",
     "community repository",
-    "multi-layer and particle editor"
+    "multi-layer and particle editor",
+    "full native AOD document editor/export",
+    "device source copy/import from catalog",
+    "native Miuix/Glasmio library renderers",
+    "AI API integration/key storage",
+    "persistent multi-layer project editing"
   ],
-  "build_blocker": "Codemagic PNG test compilation cannot resolve javax.imageio in Android module. Encoder and tests moved to engine:png JVM module; awaiting rerun.",
-  "important": "Earlier user shell research successes do not validate this newly written Android app. All Android capabilities require build/device QA.",
-  "build_attempt": "Owner-uploaded second Codemagic log: debug APK builds in 2m41s, APK v2 signature verifies, root/pack/data/Studio unit tasks and lint pass; engine:device:compileDebugUnitTestKotlin fails on ImageIO.",
+  "build_blocker": "No SDK/JDK17/Gradle execution in this workspace. Redesign source awaits PC or Codemagic verification.",
+  "important": "Top-level build/test booleans apply to this source revision, not older APK milestones.",
+  "build_attempt": "Static resources/source checks and seven new real host discovery fixtures passed. Kotlin and Android runtime tests for redesign have not run.",
   "repository": "https://github.com/minhkhoi1516/OriginThemeEngine",
-  "ci_state": "debug_apk_built_png_jvm_module_fix_awaiting_rerun",
+  "ci_state": "redesign_source_handoff_pending_compile",
   "codemagic_workflow": "ote-android-debug",
-  "status_updated_utc": "2026-11-03",
+  "status_updated_utc": "2026-11-04",
   "kotlin_test_suite_passed": false,
   "latest_source_verification_pending": true,
-  "build_evidence": "verification/codemagic-second-build.json",
-  "lint_debug_passed": true
+  "build_evidence": "verification/device-ui-smoke.json",
+  "lint_debug_passed": false,
+  "android_device_test_scope": "No redesign device testing. Previous APK launch/navigation/preset preview only.",
+  "kotlin_test_suite_evidence": "No Kotlin run on this source revision; preceding baseline success was reported by owner.",
+  "latest_source_kotlin_tests_run": false,
+  "device_resource_writes_tested": false,
+  "previous_build_milestone": {
+    "expected_source": "e6d6cbbbcbae6288d9dc7ef7647767d63e850d90",
+    "owner_reported_build_success": true,
+    "phone_ui_screenshots": true,
+    "installed_commit_verified": false,
+    "app_resource_apply_tested": false
+  }
 }

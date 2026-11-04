@@ -1,0 +1,76 @@
+{
+  "observed_date": "2026-11-04",
+  "scope": "Upstream text inspected through GitHub; no upstream UI code vendored, no dependency build performed.",
+  "sources": [
+    {
+      "repository": "compose-miuix-ui/miuix",
+      "commit": "e3cacf752139c5b9e709db271464d684720a2fc6",
+      "path": "README.md",
+      "blob_sha": "5df847c8f70a972cb32428c01ba7bc4528544d03",
+      "url": "https://github.com/compose-miuix-ui/miuix/blob/e3cacf752139c5b9e709db271464d684720a2fc6/README.md"
+    },
+    {
+      "repository": "compose-miuix-ui/miuix",
+      "commit": "e3cacf752139c5b9e709db271464d684720a2fc6",
+      "path": "gradle/libs.versions.toml",
+      "blob_sha": "bf5aa8f11a06310de2f2d464e35b724a16156966",
+      "url": "https://github.com/compose-miuix-ui/miuix/blob/e3cacf752139c5b9e709db271464d684720a2fc6/gradle/libs.versions.toml"
+    },
+    {
+      "repository": "compose-miuix-ui/miuix",
+      "commit": "e3cacf752139c5b9e709db271464d684720a2fc6",
+      "path": "miuix-ui/build.gradle.kts",
+      "blob_sha": "54075d85ab7e91ecf592a38794c752318f3094d7",
+      "url": "https://github.com/compose-miuix-ui/miuix/blob/e3cacf752139c5b9e709db271464d684720a2fc6/miuix-ui/build.gradle.kts"
+    },
+    {
+      "repository": "NEORUAA/Glasmio",
+      "commit": "700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72",
+      "path": "README.md",
+      "blob_sha": "c8468b3439dc530ca2d953ee9da53e80d2e7ebb6",
+      "url": "https://github.com/NEORUAA/Glasmio/blob/700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72/README.md"
+    },
+    {
+      "repository": "NEORUAA/Glasmio",
+      "commit": "700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72",
+      "path": "build.gradle.kts",
+      "blob_sha": "95917db90f4a72c7a318ba5491bf1a014f22603a",
+      "url": "https://github.com/NEORUAA/Glasmio/blob/700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72/build.gradle.kts"
+    },
+    {
+      "repository": "NEORUAA/Glasmio",
+      "commit": "700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72",
+      "path": "glasmio-glass/build.gradle.kts",
+      "blob_sha": "4817e933035d43fc1107a5014e0b00fc1faa686e",
+      "url": "https://github.com/NEORUAA/Glasmio/blob/700a611f9024c8f3bd9f0b8dd26d939a0dcbeb72/glasmio-glass/build.gradle.kts"
+    },
+    {
+      "repository": "SukiSU-Ultra/SukiSU-Ultra",
+      "commit": "b52705706f9d81be654a60af99929ceef0f955cd",
+      "path": "manager/gradle/libs.versions.toml",
+      "blob_sha": "755eccc0d456e43c078c782d072c2e774baa7359",
+      "url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/blob/b52705706f9d81be654a60af99929ceef0f955cd/manager/gradle/libs.versions.toml"
+    },
+    {
+      "repository": "SukiSU-Ultra/SukiSU-Ultra",
+      "commit": "b52705706f9d81be654a60af99929ceef0f955cd",
+      "path": "manager/app/src/main/java/com/sukisu/ultra/ui/theme/Theme.kt",
+      "blob_sha": "ae6c70555647cdd2c812a27d3c343457e8b8a66b",
+      "url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/blob/b52705706f9d81be654a60af99929ceef0f955cd/manager/app/src/main/java/com/sukisu/ultra/ui/theme/Theme.kt"
+    },
+    {
+      "repository": "SukiSU-Ultra/SukiSU-Ultra",
+      "commit": "b52705706f9d81be654a60af99929ceef0f955cd",
+      "path": "manager/app/src/main/java/com/sukisu/ultra/ui/component/FloatingBottomBar.kt",
+      "blob_sha": "c285aac780f90e62265c1c829dfc72fa60e9be84",
+      "url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/blob/b52705706f9d81be654a60af99929ceef0f955cd/manager/app/src/main/java/com/sukisu/ultra/ui/component/FloatingBottomBar.kt"
+    },
+    {
+      "repository": "SukiSU-Ultra/SukiSU-Ultra",
+      "commit": "b52705706f9d81be654a60af99929ceef0f955cd",
+      "path": "LICENSE",
+      "blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/blob/b52705706f9d81be654a60af99929ceef0f955cd/LICENSE"
+    }
+  ]
+}

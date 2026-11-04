@@ -1,0 +1,13 @@
+{
+  "scope": "File-integrity inventory for published research summaries; not a signature or runtime verification.",
+  "files": {
+    "research/evidence/aod-code-provenance.json": "e202608f05a765add7f4c53de73c91023d420d4bc360d5ac0767542c634a09e4",
+    "research/evidence/aod-pattern4-controls.vi.txt": "b29ab1c17aea18c271a909662d6cd1992ed051bfeaba2d441dc494c3db008b29",
+    "research/evidence/fp-evolution.vi.txt": "c16c568876398fac223b51819b1653e9d5cefcccd7158bef2ff0c6368b754c55",
+    "research/evidence/fp-wide-owner-result.json": "cc314ebb025b970506dcefd4019b96c268d224aae48bbafffb3c5e5724670561",
+    "research/evidence/itheme-clock-query.json": "5ab25a1841129525363052fbff421e1f44643b60e9bc49003eb106a577bc1d19",
+    "research/evidence/itheme-original-hash.json": "81660c53454b53cdfd6749236ff42b55abf0653d5b7146f37282be0243a5a0fc",
+    "research/evidence/sukisu-static.json": "3f39eaadc7b32379400d5944074ae98d78dd165e2d5cc7f35cbc00b269f24005",
+    "research/evidence/ui-upstream-sources.json": "47063f13d7f505d97dee6f13cae61daff5b0f9ba9e34a2831a82307b4c4070d0"
+  }
+}

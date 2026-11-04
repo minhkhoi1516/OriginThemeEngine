@@ -62,3 +62,11 @@ SU behavior, framework compatibility or SELinux access on the phone.
 
 Build dependencies: `core:model`, Kotlin coroutines-core; tests use
 `kotlin-test-junit` / JUnit4. The root coordinator owns the Gradle configuration.
+
+## Product scope and readiness
+
+The internal class name RootManager denotes a privileged transport, not a root-management product. OTE has no SU policy editor, module manager, kernel flasher or root installation feature. The user-facing page is Device and recovery.
+
+RootReadinessChecker stops immediately if probe fails and checks root state again after compatibility and status reads. ROOT_CHECK history uses VERIFIED only for UID0 plus profile verification. Unsupported profiles and unavailable SU receive separate outcomes; prior empty SUCCESS entries are displayed as uncertain without rewriting the database. IOException launch reasons retain numeric errno categories only, never exception paths/messages.
+
+DeviceCatalogReader is an explicit read-only discovery action. It lists bounded metadata at observed download roots, rejects malformed/truncated responses and does not grant write eligibility. The shell resource is owned by OTE, never loaded from a theme pack. New fixtures are host evidence only; Android root/SELinux behavior awaits testing.

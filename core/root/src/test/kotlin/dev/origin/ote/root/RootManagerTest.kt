@@ -159,6 +159,32 @@ class RootManagerTest {
         assertFalse(manager.state.value.available)
     }
 
+    @Test fun launchFailureReasonsExcludeRawPathsAndMessages() = runBlocking<Unit> {
+        val cases = listOf(
+            2 to (127 to "su_not_found"),
+            13 to (126 to "su_start_denied"),
+            1 to (126 to "su_start_denied"),
+            8 to (126 to "su_exec_format_error"),
+            24 to (127 to "su_start_failed"),
+        )
+        for ((errno, expected) in cases) {
+            val starts = AtomicInteger()
+            val manager = RootManager(starter = ProcessStarter {
+                starts.incrementAndGet()
+                throw IOException("private/path/token", IOException("error=$errno, private detail"))
+            })
+            val result = manager.execute(":")
+            assertEquals(1, starts.get())
+            assertEquals(expected.first, result.exitCode)
+            assertEquals(expected.second, result.stderr)
+            assertEquals(expected.second, manager.state.value.detail)
+            assertEquals("", result.stdout)
+            assertFalse(result.succeeded)
+            assertFalse(manager.state.value.available)
+            assertTrue(manager.state.value.checked)
+        }
+    }
+
     // assertFailsWith returns the exception; force Unit so JUnit 4 sees JVM void.
     @Test fun quoteTreatsMetacharactersAsOneLiteralArgument() = runBlocking<Unit> {
         Fixture().use { fixture ->

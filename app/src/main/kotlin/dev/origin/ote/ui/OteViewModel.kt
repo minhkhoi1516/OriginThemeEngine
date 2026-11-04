@@ -13,6 +13,8 @@ import dev.origin.ote.device.DeviceEngine
 import dev.origin.ote.model.*
 import dev.origin.ote.pack.PackCodec
 import dev.origin.ote.root.RootManager
+import dev.origin.ote.root.RootCheckOutcome
+import dev.origin.ote.root.RootReadinessChecker
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -36,6 +38,7 @@ data class StudioTransform(val fps: Int = 30, val scale: Float = 1f, val rotatio
 class OteViewModel @Inject constructor(
     private val repository: ThemeRepository,
     private val engine: DeviceEngine,
+    private val catalogService: dev.origin.ote.device.DeviceCatalogService,
     private val root: RootManager,
     private val codec: PackCodec,
     @ApplicationContext private val context: Context,
@@ -49,19 +52,21 @@ class OteViewModel @Inject constructor(
     val compatibility = _compatibility.asStateFlow()
     private val _current = MutableStateFlow<String?>(null)
     val current = _current.asStateFlow()
+    private val _catalog = MutableStateFlow<dev.origin.ote.root.DeviceCatalog?>(null)
+    val catalog = _catalog.asStateFlow()
     private val _busy = MutableStateFlow(false)
     val busy = _busy.asStateFlow()
     private val messages = Channel<Notice>(Channel.BUFFERED)
     val notices = messages.receiveAsFlow()
 
-    private fun action(name: String, success: Int = R.string.operation_done, recordSuccess: Boolean = true, block: suspend () -> Unit) {
+    private fun action(name: String, success: Int? = R.string.operation_done, recordSuccess: Boolean = true, block: suspend () -> Unit) {
         if (_busy.value) return
         _busy.value = true
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) { block() }
                 if (recordSuccess) repository.log(name, "SUCCESS", "")
-                messages.send(Notice(success))
+                if (success != null) messages.send(Notice(success))
             } catch (cancel: CancellationException) {
                 throw cancel
             } catch (error: Exception) {
@@ -98,16 +103,30 @@ class OteViewModel @Inject constructor(
             catch (error: Exception) { messages.send(Notice(R.string.operation_failed, error.message?.take(300))) }
         }
     }
-    fun checkRoot() = action("ROOT_CHECK", R.string.root_check_complete) {
+    fun scanDeviceSources() = action("CATALOG_SCAN") {
+        _catalog.value = null
+        _catalog.value = catalogService.scan()
+    }
+    fun checkRoot() = action("ROOT_CHECK", success = null, recordSuccess = false) {
         _compatibility.value = null
         _current.value = null
-        val checked = root.probe()
-        if (checked.available) {
-            _compatibility.value = engine.compatibility()
-            _current.value = engine.currentStatus()
-        } else {
-            _compatibility.value = null
-            _current.value = null
+        val result = RootReadinessChecker(root::probe, { root.state.value },
+            engine::compatibility, engine::currentStatus).check()
+        _compatibility.value = result.compatibility
+        _current.value = result.currentStatus
+        when (result.outcome) {
+            RootCheckOutcome.ROOT_UNAVAILABLE -> {
+                repository.log("ROOT_CHECK", "FAILED", result.root.detail.ifBlank { "root_not_checked" })
+                messages.send(Notice(rootDetailText(result.root)))
+            }
+            RootCheckOutcome.UNSUPPORTED -> {
+                repository.log("ROOT_CHECK", "UNSUPPORTED", "device_profile_not_verified")
+                messages.send(Notice(R.string.profile_unsupported))
+            }
+            RootCheckOutcome.VERIFIED -> {
+                repository.log("ROOT_CHECK", "VERIFIED", "uid_0_and_profile_verified")
+                messages.send(Notice(R.string.root_check_complete))
+            }
         }
     }
     fun apply(id: String) = action("APPLY", recordSuccess = false) {
@@ -126,8 +145,9 @@ class OteViewModel @Inject constructor(
             appendLine("Origin Theme Engine diagnostics")
             appendLine("Model=${device.model}; SDK=${device.sdk}; Build=${device.build}")
             appendLine("Root checked=${rootState.value.checked}; available=${rootState.value.available}; manager=${rootState.value.manager}")
+            appendLine("Root reason=${rootState.value.detail.ifBlank { "not_checked" }}")
             appendLine("Profile=${_compatibility.value?.profileId ?: "unverified"}")
-            appendLine("Compatibility=${_compatibility.value?.supported ?: false}")
+            appendLine("Compatibility=${_compatibility.value?.supported?.toString() ?: "not_checked"}")
             // Deliberately exclude content URIs, account identifiers, raw su output and file paths.
             history.value.take(50).forEach { appendLine("${it.timestamp} ${it.action} ${it.status}") }
         }

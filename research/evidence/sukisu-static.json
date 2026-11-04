@@ -1,0 +1,384 @@
+{
+  "analysis_date": "2026-11-04",
+  "file": "1-SukiSU_v4.3.0-r1_41142-arm64-v8a-release-spoofed.apk",
+  "sha256": "0c6c2db9fc591ff2441108e74e2def7fe5f785049be5b9c474312b6f381be5cf",
+  "size": 10689344,
+  "zip_entries": 215,
+  "zip_crc_valid": true,
+  "package": "xrzibv.uhthfe.adajzk",
+  "version_name": "v4.3.0-r1",
+  "version_code": "41142",
+  "sdk": {
+    "minSdkVersion": "26",
+    "targetSdkVersion": "37"
+  },
+  "inspection": "Static APK only; not executed; signer and source-to-binary relationship not authenticated.",
+  "default_ui_resources": [
+    {
+      "name": "string/settings_background_blur",
+      "value": "Background Blur",
+      "resource_id": "0x7f0b0305"
+    },
+    {
+      "name": "string/settings_color_style",
+      "value": "Color Style",
+      "resource_id": "0x7f0b0313"
+    },
+    {
+      "name": "string/settings_enable_blur",
+      "value": "Blur",
+      "resource_id": "0x7f0b031a"
+    },
+    {
+      "name": "string/settings_enable_glass",
+      "value": "Liquid glass",
+      "resource_id": "0x7f0b031c"
+    },
+    {
+      "name": "string/settings_floating_bottom_bar",
+      "value": "Floating bottom bar",
+      "resource_id": "0x7f0b0329"
+    },
+    {
+      "name": "string/theme_preview_caption_material",
+      "value": "Preview · Material 3 Expressive",
+      "resource_id": "0x7f0b0493"
+    },
+    {
+      "name": "string/theme_preview_caption_miuix",
+      "value": "Preview · Miuix",
+      "resource_id": "0x7f0b0494"
+    }
+  ],
+  "dex_class_count": 7155,
+  "dex_defined_methods": 31201,
+  "dex_string_count": 26182,
+  "ui_callsites": [
+    {
+      "name": "Lbp4;->s(Ljava/lang/Object;)Ljava/lang/Object;",
+      "id": 4502,
+      "refs": [
+        {
+          "pc": 2707,
+          "kind": "string",
+          "value": "enable_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lca;->i(Ljava/lang/String;Ljava/lang/String;Lpn0;I)V",
+      "id": 5213,
+      "refs": [
+        {
+          "pc": 353,
+          "kind": "string",
+          "value": "setMiuixMonet"
+        },
+        {
+          "pc": 355,
+          "kind": "string",
+          "value": "setMiuixMonet(Z)V"
+        }
+      ]
+    },
+    {
+      "name": "Ldz2;->toString()Ljava/lang/String;",
+      "id": 7389,
+      "refs": [
+        {
+          "pc": 2,
+          "kind": "string",
+          "value": "MiuixPreviewDestination(label="
+        }
+      ]
+    },
+    {
+      "name": "Le33;->f(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "id": 7481,
+      "refs": [
+        {
+          "pc": 179,
+          "kind": "string",
+          "value": "MiuixReadmeAlpha"
+        },
+        {
+          "pc": 215,
+          "kind": "string",
+          "value": "MiuixReadmePlaceholderAlpha"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->G(Ljava/lang/String;)V",
+      "id": 9395,
+      "refs": [
+        {
+          "pc": 14,
+          "kind": "string",
+          "value": "color_style"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->N(Z)V",
+      "id": 9402,
+      "refs": [
+        {
+          "pc": 0,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->O(Z)V",
+      "id": 9403,
+      "refs": [
+        {
+          "pc": 0,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->Y(Z)V",
+      "id": 9413,
+      "refs": [
+        {
+          "pc": 0,
+          "kind": "string",
+          "value": "miuix_monet"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->e()Ljava/lang/String;",
+      "id": 9423,
+      "refs": [
+        {
+          "pc": 4,
+          "kind": "string",
+          "value": "color_style"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->l()Z",
+      "id": 9436,
+      "refs": [
+        {
+          "pc": 4,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->m()Z",
+      "id": 9437,
+      "refs": [
+        {
+          "pc": 4,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lfo4;->w()Z",
+      "id": 9447,
+      "refs": [
+        {
+          "pc": 4,
+          "kind": "string",
+          "value": "miuix_monet"
+        }
+      ]
+    },
+    {
+      "name": "Lgv;->a()Ljava/lang/Object;",
+      "id": 10817,
+      "refs": [
+        {
+          "pc": 26,
+          "kind": "string",
+          "value": "DynamicMaterialTheme not initialized"
+        }
+      ]
+    },
+    {
+      "name": "Lh53;->f(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "id": 11082,
+      "refs": [
+        {
+          "pc": 739,
+          "kind": "string",
+          "value": "MiuixReleaseDescAlpha"
+        },
+        {
+          "pc": 788,
+          "kind": "string",
+          "value": "MiuixDescPlaceholderAlpha"
+        }
+      ]
+    },
+    {
+      "name": "Lhe1;->D(Lb71;FFZF)V",
+      "id": 11384,
+      "refs": [
+        {
+          "pc": 184,
+          "kind": "string",
+          "value": "LiquidGlassLensDispersion"
+        },
+        {
+          "pc": 187,
+          "kind": "string",
+          "value": "LiquidGlassLens"
+        }
+      ]
+    },
+    {
+      "name": "Lhg2;-><init>(La65;Lz93;)V",
+      "id": 11524,
+      "refs": [
+        {
+          "pc": 7,
+          "kind": "string",
+          "value": "SulogScreenMiuix$onSearchStatusChange(Lxrzibv/uhthfe/adajzk/ui/screen/sulog/SulogActions;Landroidx/compose/runtime/MutableState;Lxrzibv/uhthfe/adajzk/ui/component/SearchStatus;)V"
+        }
+      ]
+    },
+    {
+      "name": "Li23;-><init>(Ld63;Lz93;)V",
+      "id": 12234,
+      "refs": [
+        {
+          "pc": 4,
+          "kind": "string",
+          "value": "ModulePagerMiuix_3xixttE$onModuleAddShortcut(Lxrzibv/uhthfe/adajzk/ui/screen/module/ModuleShortcutState;Landroidx/compose/runtime/MutableState;Lxrzibv/uhthfe/adajzk/data/model/Module;Lxrzibv/uhthfe/adajzk/ui/screen/module/ShortcutType;)V"
+        }
+      ]
+    },
+    {
+      "name": "Ljf0;->toString()Ljava/lang/String;",
+      "id": 15326,
+      "refs": [
+        {
+          "pc": 22,
+          "kind": "string",
+          "value": ", onSetMiuixMonet="
+        }
+      ]
+    },
+    {
+      "name": "Lkg6;->onSharedPreferenceChanged(Landroid/content/SharedPreferences;Ljava/lang/String;)V",
+      "id": 16632,
+      "refs": [
+        {
+          "pc": 2,
+          "kind": "string",
+          "value": "color_style"
+        }
+      ]
+    },
+    {
+      "name": "Lwa;->o(Ljava/lang/String;Ljava/lang/String;Lk32;ZLpr1;Lpn0;I)V",
+      "id": 30854,
+      "refs": [
+        {
+          "pc": 110,
+          "kind": "string",
+          "value": "MiuixSectionChevron"
+        }
+      ]
+    },
+    {
+      "name": "Lmf0;->i(Ljava/lang/Object;)Ljava/lang/Object;",
+      "id": 18794,
+      "refs": [
+        {
+          "pc": 538,
+          "kind": "string",
+          "value": "enable_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lu16;-><clinit>()V",
+      "id": 28145,
+      "refs": [
+        {
+          "pc": 2,
+          "kind": "string",
+          "value": "Miuix"
+        },
+        {
+          "pc": 12,
+          "kind": "string",
+          "value": "Material"
+        }
+      ]
+    },
+    {
+      "name": "Lzg6;-><clinit>()V",
+      "id": 34716,
+      "refs": [
+        {
+          "pc": 6,
+          "kind": "string",
+          "value": "miuix_monet"
+        },
+        {
+          "pc": 10,
+          "kind": "string",
+          "value": "color_style"
+        },
+        {
+          "pc": 18,
+          "kind": "string",
+          "value": "enable_blur"
+        },
+        {
+          "pc": 20,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar"
+        },
+        {
+          "pc": 22,
+          "kind": "string",
+          "value": "enable_floating_bottom_bar_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lzg6;->c()Lyg6;",
+      "id": 34719,
+      "refs": [
+        {
+          "pc": 63,
+          "kind": "string",
+          "value": "enable_blur"
+        }
+      ]
+    },
+    {
+      "name": "Lzv2;->toString()Ljava/lang/String;",
+      "id": 35076,
+      "refs": [
+        {
+          "pc": 2,
+          "kind": "string",
+          "value": "MaterialPreviewDestination(label="
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Obfuscated symbols; runtime layout not measured.",
+    "Resource/string presence alone does not prove a live screen.",
+    "No proof that this APK bundles Glasmio.",
+    "No SukiSU root/module/kernel behavior is reused."
+  ]
+}

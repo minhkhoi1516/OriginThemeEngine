@@ -1,0 +1,36 @@
+<resources>
+    <string name="workspaces_title">Workspaces</string>
+    <string name="workspaces_subtitle">Choose what you want to design. Each workspace keeps its own assets and tools.</string>
+    <string name="workspace_aod_description">Start with an AOD sample, inspect its animation and edit your artwork.</string>
+    <string name="workspace_fp_description">Create the animation that appears around your fingerprint sensor.</string>
+    <string name="workspace_project_count">%1$d items in your library</string>
+    <string name="open_workspace">Open workspace</string>
+    <string name="workspace_flow">Choose a source → edit → preview → review application.</string>
+    <string name="open_workspace_studio">Edit</string>
+    <string name="device_sources">On this device</string>
+    <string name="aod_studio_title">AOD artwork studio</string>
+    <string name="fp_studio_title">Fingerprint studio</string>
+    <string name="aod_studio_scope">This editor exports artwork. Editing live clocks, battery layout and a complete ITZ is planned in the redesign.</string>
+    <string name="aod_source_help">Download a sample in iTheme first. Scan the observed download location to list ITZ candidates.</string>
+    <string name="fp_source_help">Download and try a Vivo fingerprint effect first. Only the researched base effect can currently be used for application.</string>
+    <string name="scan_device_sources">Scan with root</string>
+    <string name="catalog_scope">Lists file names and sizes from known locations. Template copying, full parsing and editing from this list are not connected yet.</string>
+    <string name="catalog_not_scanned">Press Scan to request a read. Nothing is scanned on launch.</string>
+    <string name="catalog_limited">The list reached its reading limit; it may be incomplete.</string>
+    <string name="catalog_no_candidates">No candidates observed at the known location. This does not prove no themes are installed.</string>
+    <string name="catalog_bytes">%1$d bytes</string>
+    <string name="catalog_candidate_only">Detected file • format and apply compatibility not verified</string>
+    <string name="review_apply">Review application</string>
+    <string name="apply_center">Apply</string>
+    <string name="apply_review_intro">Select a library item and review the target before any device change.</string>
+    <string name="apply_choose_project">Choose an item from this workspace first.</string>
+    <string name="preview_scope">App preview; actual Vivo playback may use a different viewport or schedule.</string>
+    <string name="aod_apply_research_status">AOD resource replacement worked in earlier phone experiments. Its app transaction and restore flow are still being implemented, so application is unavailable here.</string>
+    <string name="fp_apply_steps">1. Keep the downloaded Evolution effect installed.\n2. Select None in system fingerprint effect settings.\n3. Verify root and compatibility in OTE.\n4. Apply, then reselect Evolution in system settings to preview.</string>
+    <string name="fp_none_acknowledgement">I selected None in system settings.</string>
+    <string name="apply_after_review">Continue to confirmation</string>
+    <string name="apply_backup_automatic">OTE verifies the target and creates a snapshot before writing. A completed file update still requires playback verification.</string>
+    <string name="ui_implementation_notice">These are the current local styles. Native Miuix and Glasmio integration is specified in the desktop handoff and is not included in this build.</string>
+    <string name="history_catalog_scan">Read device sources</string>
+    <string name="back">Back</string>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "build_evidence": "Owner reported successful Codemagic build after e6d6cbb; complete final log/artifact not supplied.",
+  "expected_installed_source": "e6d6cbbbcbae6288d9dc7ef7647767d63e850d90",
+  "installed_commit_independently_confirmed": false,
+  "screenshots": [
+    {
+      "filename": "1-1000061963.jpg",
+      "sha256": "3dd14e8904ba56a7267f4777a491dcc038d9a5a134f513a4b99a54a0b066e625"
+    },
+    {
+      "filename": "2-1000061964.jpg",
+      "sha256": "6355864eaa6e39e482485f977d350810e529c7babf43ce3f051f3e31ee624955"
+    },
+    {
+      "filename": "3-1000061965.jpg",
+      "sha256": "fb8900cc6766264d6254d283f488c5a8b3c58e459741986a112fb6d08323964e"
+    },
+    {
+      "filename": "4-1000061967.jpg",
+      "sha256": "dd02ea35d5193d9d6db162a7530da54af6a782b2ce83f62718ea1b1682bc0e6e"
+    },
+    {
+      "filename": "5-1000061969.jpg",
+      "sha256": "13ed6bc1fc76f717c4a8602ced2839fb8a6d466ba094112d2aeacdf860057ce8"
+    }
+  ],
+  "visible_on_phone": [
+    "Dashboard and device model V2453A / SDK36",
+    "AOD library empty state",
+    "Fingerprint library with Soft Pulse 256x256 /16 frames",
+    "Studio preview and frame/timeline/transform controls",
+    "Root Center with su_start_failed and a contradictory successful ROOT_CHECK history entry"
+  ],
+  "owner_followup": "check ok luôn rồi",
+  "root_followup_scope": "Owner reports a successful new check. No exported root/compatibility evidence was supplied.",
+  "device_smoke_tested": true,
+  "device_resource_apply_tested": false,
+  "device_restore_tested": false,
+  "performance_measured": false,
+  "changes_pending_ci": [
+    "Correct root-readiness history and skip subsequent reads when root is unavailable or lost",
+    "Sanitize numeric SU launch failure categories without disclosing exception messages",
+    "Localize actionable root status and collapse technical details",
+    "Split Studio controls into three panels; retain common export/reset actions"
+  ],
+  "latest_patch_version": "0.1.1",
+  "latest_patch_device_tested": false
+}

@@ -1,0 +1,9 @@
+{
+  "observed_sha256": "b8aefa82bc08a25c829ee6a3d4d48816da386ff6fac1986b6632d913b73503b7",
+  "path": "/data/bbkcore/theme//.dwd/c/o/m/b/b/k/t/h/e/m/e/C/动态黑塔少女 揭露.itz",
+  "reference": "sample-original.itz",
+  "reference_sha256": "b8aefa82bc08a25c829ee6a3d4d48816da386ff6fac1986b6632d913b73503b7",
+  "match": true,
+  "source_sha256": "b58b8dd809134945ace5ece240e0b44400b4686c10aba44ec87c427a8be50666",
+  "scope": "User-reported read-only sha256sum confirms downloaded ITZ matches supplied original. Does not measure current extracted files, database, package authenticity, or automatic restore success."
+}

@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.core.tween
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -47,6 +48,8 @@ fun OteApp(viewModel: OteViewModel = hiltViewModel()) {
     val snackbar = remember { SnackbarHostState() }
     val nav = rememberNavController()
     var previewId by rememberSaveable { mutableStateOf<String?>(null) }
+    var reviewId by rememberSaveable { mutableStateOf<String?>(null) }
+    var editorId by rememberSaveable { mutableStateOf<String?>(null) }
     var pending by remember { mutableStateOf<PendingAction?>(null) }
     var exportId by rememberSaveable { mutableStateOf<String?>(null) }
     var importKind by rememberSaveable { mutableStateOf(ThemeKind.FINGERPRINT) }
@@ -71,23 +74,33 @@ fun OteApp(viewModel: OteViewModel = hiltViewModel()) {
     val diagnosticsExporter = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { uri -> uri?.let(viewModel::exportDiagnostics) }
     val backupExporter = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri -> uri?.let(viewModel::exportBackup) }
     val destinations = remember { listOf(
-        Destination("home", R.string.home, Icons.Outlined.Home), Destination("aod", R.string.aod, Icons.Outlined.Nightlight),
-        Destination("fingerprint", R.string.fingerprint_short, Icons.Outlined.Fingerprint), Destination("studio", R.string.studio, Icons.Outlined.Tune),
+        Destination("home", R.string.workspaces_title, Icons.Outlined.Home),
+        Destination("apply", R.string.apply_center, Icons.Outlined.CheckCircle),
         Destination("root", R.string.root_short, Icons.Outlined.Security), Destination("settings", R.string.settings, Icons.Outlined.Settings),
     ) }
     val backStack by nav.currentBackStackEntryAsState()
     fun navigate(route: String) = nav.navigate(route) {
-        popUpTo(nav.graph.findStartDestination().id) { saveState = true }
-        launchSingleTop = true; restoreState = true
+        if (route in destinations.map { it.route }) {
+            popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+            restoreState = true
+        }
+        launchSingleTop = true
     }
     OteTheme(preferences) {
         Scaffold(
-            topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }, actions = {
+            topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }, navigationIcon = {
+                if (backStack?.destination?.route !in destinations.map { it.route }) {
+                    IconButton(onClick = { nav.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Outlined.ArrowBack, stringResource(R.string.back))
+                    }
+                }
+            }, actions = {
                 if (busy) CircularProgressIndicator(Modifier.size(24.dp).padding(2.dp), strokeWidth = 2.dp)
                 Spacer(Modifier.width(12.dp))
             }) },
             bottomBar = { NavigationBar { destinations.forEach { destination ->
-                NavigationBarItem(selected = backStack?.destination?.route == destination.route,
+                NavigationBarItem(selected = (backStack?.destination?.route == destination.route ||
+                    destination.route == "home" && backStack?.destination?.route !in listOf("apply", "root", "settings")),
                     onClick = { navigate(destination.route) }, icon = { Icon(destination.icon, stringResource(destination.title)) },
                     label = { Text(stringResource(destination.title), maxLines = 1, style = MaterialTheme.typography.labelSmall) })
             } } }, snackbarHost = { SnackbarHost(snackbar) },
@@ -95,19 +108,25 @@ fun OteApp(viewModel: OteViewModel = hiltViewModel()) {
             NavHost(nav, startDestination = "home", Modifier.padding(padding),
                 enterTransition = { fadeIn(tween(if (preferences.reducedMotion) 0 else 180)) },
                 exitTransition = { fadeOut(tween(if (preferences.reducedMotion) 0 else 120)) }) {
-                composable("home") { DashboardScreen(viewModel, onNavigate = ::navigate, onPreview = { previewId = it.id }) }
+                composable("home") { WorkspaceChooser(viewModel, onOpen = ::navigate) }
                 for ((route, kind) in listOf("aod" to ThemeKind.AOD, "fingerprint" to ThemeKind.FINGERPRINT)) {
                     composable(route) { LibraryScreen(kind, viewModel, onPreview = { previewId = it.id },
-                        onApply = { pending = PendingAction.Apply(it) }, onDelete = { pending = PendingAction.Delete(it) },
+                        onApply = { reviewId = it.id; navigate("apply") }, onDelete = { pending = PendingAction.Delete(it) },
                         onExport = { exportId = it.id; packExporter.launch("${it.id}.otepack") },
                         onImportPack = { packPicker.launch(arrayOf("*/*")) },
                         onImportPng = { importKind = kind; pngPicker.launch(arrayOf("image/png")) },
+                        onImportGif = { importKind = kind; gifPicker.launch(arrayOf("image/gif")) },
+                        onStudio = { editorId = null; navigate("studio_$route") },
+                        onSources = { navigate("sources_$route") }) }
+                    composable("sources_$route") { DeviceSourcesScreen(kind, viewModel) }
+                    composable("studio_$route") { StudioScreen(viewModel, kind, editorId,
+                        onExport = { id, edit -> studioExport = id to edit; studioExporter.launch("studio-${id}.otepack") },
+                        onImportPng = { importKind = kind; pngPicker.launch(arrayOf("image/png")) },
                         onImportGif = { importKind = kind; gifPicker.launch(arrayOf("image/gif")) }) }
                 }
-                composable("studio") { StudioScreen(viewModel,
-                    onExport = { id, edit -> studioExport = id to edit; studioExporter.launch("studio-${id}.otepack") },
-                    onImportPng = { importKind = ThemeKind.FINGERPRINT; pngPicker.launch(arrayOf("image/png")) },
-                    onImportGif = { importKind = ThemeKind.FINGERPRINT; gifPicker.launch(arrayOf("image/gif")) }) }
+                composable("apply") { ApplyReviewScreen(viewModel, reviewId,
+                    onSelect = { reviewId = it }, onConfirm = { pending = PendingAction.Apply(it) },
+                    onRoot = { navigate("root") }) }
                 composable("root") { RootScreen(viewModel, onBackup = { pending = PendingAction.Backup },
                     onRestore = { pending = PendingAction.Restore }, onExport = { diagnosticsExporter.launch("ote-diagnostics.txt") },
                     onExportBackup = { backupExporter.launch("ote-restore-point.zip") }) }
@@ -120,6 +139,15 @@ fun OteApp(viewModel: OteViewModel = hiltViewModel()) {
                     Text(item.title, style = MaterialTheme.typography.headlineSmall)
                     ThemePreview(item, playing = true, Modifier.fillMaxWidth().height(340.dp))
                     ThemeFacts(item)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilledTonalButton(onClick = {
+                            editorId = item.id; previewId = null
+                            navigate(if(item.kind == ThemeKind.AOD) "studio_aod" else "studio_fingerprint")
+                        }) { Text(stringResource(R.string.open_workspace_studio)) }
+                        OutlinedButton(onClick = { reviewId = item.id; previewId = null; navigate("apply") }) {
+                            Text(stringResource(R.string.review_apply))
+                        }
+                    }
                     Text(item.manifest.description, style = MaterialTheme.typography.bodyMedium)
                     FilledTonalButton(onClick = { exportId = item.id; packExporter.launch("${item.id}.otepack") }, enabled = !busy) {
                         Text(stringResource(R.string.export_pack))
