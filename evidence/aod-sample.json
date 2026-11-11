@@ -1,0 +1,74 @@
+{
+  "sample": "动态黑塔少女 揭露.itz",
+  "sample_id": "1638987",
+  "resource_id": "700076480",
+  "sha256": "b8aefa82bc08a25c829ee6a3d4d48816da386ff6fac1986b6632d913b73503b7",
+  "outer": {
+    "size": 11297609,
+    "entry_count": 7,
+    "file_count": 5,
+    "crc_all_passed": true,
+    "duplicate_paths": [],
+    "encrypted_entries": [],
+    "trailing_bytes": 0
+  },
+  "inner": {
+    "size": 9957682,
+    "entry_count": 137,
+    "file_count": 135,
+    "sha256": "ec291f0844ce5d6217e7af074238cbd88635d74ee3418c6885c09e975c2c9f6b",
+    "crc_all_passed": true
+  },
+  "branches": {
+    "1080": {
+      "image_groups": {
+        "JPEG 1080x744 RGB": 55,
+        "PNG 60x80 RGBA": 10,
+        "PNG 40x80 RGBA": 1
+      },
+      "frame_count": 54,
+      "duration_ms": [
+        50
+      ],
+      "nominal_timeline_ms": 2700,
+      "background_top": "100",
+      "configured_max_height": "900"
+    },
+    "1440": {
+      "image_groups": {
+        "JPEG 1440x992 RGB": 55,
+        "PNG 80x106 RGBA": 10,
+        "PNG 53x106 RGBA": 1
+      },
+      "frame_count": 54,
+      "duration_ms": [
+        50
+      ],
+      "nominal_timeline_ms": 2700,
+      "background_top": "133",
+      "configured_max_height": "1200"
+    }
+  },
+  "installed_tar": {
+    "archive_sha256": "5992dd571161b050ecbd4f41e02013eca397a12aff4f024bfbb71780d82b7afe",
+    "archive_bytes": 11516928,
+    "regular_files": 135,
+    "all_files_byte_identical": true,
+    "mode_counts": {
+      "0o600": 135
+    },
+    "ownership_counts": {
+      "1000:1000": 135
+    }
+  },
+  "live_metadata_note": "Later owner-provided listings showed 0777 instead of initial 0600/0700; these are observations, not universal target modes. TAR audit does not prove SELinux xattr preservation.",
+  "downloaded_original": {
+    "path": "/data/bbkcore/theme/.dwd/c/o/m/b/b/k/t/h/e/m/e/C/动态黑塔少女 揭露.itz",
+    "owner_reported_sha256_matches": true
+  },
+  "aod_mod_result": {
+    "source": "Owner feedback in conversation and retained trial-user-confirmation.json",
+    "reported_works": true,
+    "frame_timing_power_and_viewport_measured": false
+  }
+}

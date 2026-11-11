@@ -1,0 +1,21 @@
+{
+  "source": "User feedback in conversation, 2026-11-01",
+  "reported_result": "No cropping; user satisfied with Angel v2 wide.",
+  "tested_resource": {
+    "canvas": [
+      1080,
+      600
+    ],
+    "frames": 27,
+    "duration_ms": 33,
+    "nominal_timeline_ms": 891,
+    "payload_sha256": "e7e1a8a12367a15140d1a4195a50c67c438603e1b65d0da138ce91776719d0fe"
+  },
+  "evidence_type": "User visual observation; no new device log or recording supplied.",
+  "observation_surface": "Not explicitly specified in latest feedback.",
+  "limits": [
+    "Successful 1080x600 case is not a measured maximum viewport or texture dimension.",
+    "Physical diagonal 6.78in does not determine software rendering limits.",
+    "No measurements of memory, battery, frame pacing or long-term stability."
+  ]
+}

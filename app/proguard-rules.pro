@@ -1,3 +1,0 @@
--keepattributes Signature,*Annotation*
--keep class dev.origin.ote.model.** { *; }
--keep class dev.origin.ote.device.TransactionRecord { *; }

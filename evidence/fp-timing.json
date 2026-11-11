@@ -1,0 +1,50 @@
+{
+  "clock_function": "0xa182c",
+  "clock_source": "std::__ndk1::chrono::steady_clock::now",
+  "division_magic": "0x431bde82d7b634db",
+  "shift_after_signed_multiply_high": 18,
+  "nonnegative_examples": [
+    {
+      "input_ticks": 0,
+      "converted_milliseconds": 0
+    },
+    {
+      "input_ticks": 1,
+      "converted_milliseconds": 0
+    },
+    {
+      "input_ticks": 999999,
+      "converted_milliseconds": 0
+    },
+    {
+      "input_ticks": 1000000,
+      "converted_milliseconds": 1
+    },
+    {
+      "input_ticks": 32000000,
+      "converted_milliseconds": 32
+    },
+    {
+      "input_ticks": 832000000,
+      "converted_milliseconds": 832
+    },
+    {
+      "input_ticks": 1000000000,
+      "converted_milliseconds": 1000
+    },
+    {
+      "input_ticks": 1000000000000000,
+      "converted_milliseconds": 1000000000
+    },
+    {
+      "input_ticks": 9223372036854775807,
+      "converted_milliseconds": 9223372036854
+    }
+  ],
+  "interval_field_object_offset": 144,
+  "interval_constructor": "0xa8e08",
+  "frame_constructor": "0xbc968",
+  "atlas_constructor": "0xaa8bc",
+  "scheduler_callback": "0xa9cc0",
+  "scope": "Arithmetic reconstruction/static disassembly, not execution or device frame measurement."
+}

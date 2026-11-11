@@ -1,7 +1,0 @@
-{
-  "command": "./gradlew :core:root:test :engine:pack:test :data:testDebugUnitTest :engine:device:testDebugUnitTest :app:assembleDebug --no-daemon",
-  "exit_code": 1,
-  "output": "OTE build bootstrap: A complete JDK 17 is required. Set JAVA_HOME to it; a JRE is insufficient.",
-  "gradle_or_kotlin_compilation_started": false,
-  "apk_produced": false
-}

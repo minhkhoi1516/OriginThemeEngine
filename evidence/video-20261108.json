@@ -1,0 +1,26 @@
+{
+  "filename": "VID_20261108_061622_590.mp4",
+  "sha256": "d3581ee1f8a4ed1d796df28436806ca7d541af1242a799e14ddd4a2e566af8be",
+  "bytes": 3263090,
+  "reviewed_on": "2026-11-11",
+  "duration_seconds": 22.051646,
+  "encoded_frame_size": [
+    576,
+    1280
+  ],
+  "method": "Local ffprobe metadata; contact sheet sampled every two seconds; full-size frame inspected at 20.5 seconds. Original not published.",
+  "observed": [
+    "Fingerprint effect selection screen and simulated phone preview with multiple effects.",
+    "Continue animation after unlock switch shown enabled.",
+    "Alternation with wallpaper/clock UI and screen recorder controls.",
+    "At 20.5 seconds a purple visual effect appears near bottom of wallpaper/clock UI, outside the simulated preview phone."
+  ],
+  "owner_report": "Owner reports modifying preview and other visual resources within downloaded FP folders, retaining names and allowing larger files.",
+  "not_established": [
+    "No file editing or before/after hash diff shown.",
+    "No exact modified filenames, codec changes, byte or pixel limits established.",
+    "Screen recording dimensions do not identify physical display resolution.",
+    "Cannot establish biometric authentication outcome or a renderer call trace from recording alone.",
+    "No power, frame-pacing, long-term stability or all-device compatibility measurement."
+  ]
+}

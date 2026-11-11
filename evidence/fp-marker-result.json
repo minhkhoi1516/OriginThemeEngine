@@ -1,0 +1,18 @@
+{
+  "source_date": "2026-10-31",
+  "log_sha256": "eb4e0cedfeade41d769e2e91a394f1cabd67c01b2feab7ec77bf93cf79688ce5",
+  "prepare": "passed",
+  "apply": "passed_from_png_control",
+  "check": {
+    "target": "png-marker",
+    "selected_effect": "2003000011",
+    "backup": "verified"
+  },
+  "restore": "passed_to_original",
+  "user_observation": "Marker checkerboard visible; no problems reported in this trial.",
+  "observation_surface": "Not specified in the marker feedback; do not assign preview or actual unlock as independently observed.",
+  "limits": [
+    "No long-term stability, power, frame timing or update compatibility measurements.",
+    "Final logged ZIP restored; later unlogged state and renderer caches unknown."
+  ]
+}

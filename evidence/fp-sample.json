@@ -1,0 +1,86 @@
+{
+  "sample": "进化 / Evolution",
+  "resId": "2003000011",
+  "description_id": "1107432",
+  "edition": 2,
+  "category": 103,
+  "listing_source_sha256": "15f068e972da351c629e3143c0ed9bc28d0f973a5e626965b905da2e9f05839b",
+  "listing": {
+    "root": "/data/bbkcore/bbkthemeres/novoland/103/进化/",
+    "owner": "u0_a255",
+    "group": "u0_a255",
+    "mode": "0777",
+    "selinux": "u:object_r:vivo_data_file:s0:c512,c768",
+    "files": {
+      "description.xml": 759,
+      "key": 186,
+      "content/animation.zip": 761220,
+      "preview/preview_0.mp4": 69873,
+      "preview/preview_0_ff.jpg": 32793,
+      "thumb/thumb_0.jpg": 7800
+    }
+  },
+  "note": "Listing metadata and sizes are historical observations, not required universal permissions or size limits. Local preview/thumbnail bytes were not supplied for codec audit.",
+  "payload": {
+    "sha256": "050502563a6b1ee1e0904b74918c81d343cf4e76ff7f66791bb87055ad6fbbc4",
+    "crc_all_passed": true,
+    "attributes": {
+      "type": "18",
+      "name": "evolution",
+      "atlasData": "evolution/evolution.xml",
+      "atlasTexture": "evolution/evolution.ktx2",
+      "texture": "evolution/evolution_{n}.png",
+      "count": "26",
+      "duration": "32",
+      "height": "600",
+      "width": "600"
+    },
+    "entry_count": 30,
+    "ktx2": {
+      "header": {
+        "vkFormat": 0,
+        "typeSize": 1,
+        "pixelWidth": 2005,
+        "pixelHeight": 924,
+        "pixelDepth": 0,
+        "layerCount": 0,
+        "faceCount": 1,
+        "levelCount": 1,
+        "supercompressionScheme": 0,
+        "dfdByteOffset": 104,
+        "dfdByteLength": 44,
+        "kvdByteOffset": 148,
+        "kvdByteLength": 56,
+        "sgdByteOffset": 0,
+        "sgdByteLength": 0
+      },
+      "levels": [
+        {
+          "offset": 208,
+          "length": 1855392,
+          "uncompressed_length": 1855392
+        }
+      ],
+      "dfd_color_model": 166,
+      "texel_block_dimensions": [
+        4,
+        4,
+        1,
+        1
+      ],
+      "bytes_per_block": 16,
+      "metadata": [
+        {
+          "key": "KTXorientation",
+          "value": "rd"
+        },
+        {
+          "key": "KTXwriter",
+          "value": "PVRTexLib v5.1.0"
+        }
+      ]
+    },
+    "original_png": "26 indexed PNGs, 600x600, palette with transparency"
+  },
+  "verification_field": "description.xml contains verify_file/vf_file content/animation.zip. Enforcement outside studied code paths is not fully known."
+}
